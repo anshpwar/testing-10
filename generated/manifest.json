@@ -1,0 +1,21 @@
+{
+  "generated_by": "tools/gen_manifest.py",
+  "rules": {
+    "baseline_freeze_days": "b6d440a8b3b3",
+    "critical_slack_days": "04dae9aa4fde",
+    "escalation_after_days": "efcf02799171",
+    "estimate_confidence_pct": "f063a0238f47",
+    "holiday_cover_pct": "483bb2c1959e",
+    "max_assignments_per_person": "e9650b698e38",
+    "max_daily_hours": "cf9c0d31d25f",
+    "milestone_slip_tolerance_days": "f7190af510f8",
+    "overtime_multiplier_pct": "8d3c23120232",
+    "review_turnaround_hours": "9aeb9a53ed82",
+    "risk_reserve_pct": "2b76773a2fd1",
+    "sprint_length_days": "20017b2ca0ea",
+    "standup_minutes": "fd95e03bb014",
+    "task_buffer_pct": "e6addde62354",
+    "timesheet_lock_days": "7688bb594618",
+    "wip_limit": "2c1c876cf46d"
+  }
+}

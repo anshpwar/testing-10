@@ -24,11 +24,11 @@ def review_turnaround_hours(change_lines):
 
 def max_daily_hours(seniority):
     """Most hours one person may log in a day, by seniority level."""
-    if seniority <= 1:
-        return 6
     if seniority <= 2:
-        return 7
+        return 6
     if seniority <= 3:
+        return 7
+    if seniority <= 4:
         return 8
     return 9
 

@@ -27,9 +27,9 @@ class RuleTests(unittest.TestCase):
     def test_max_daily_hours(self):
         self.assertEqual(rules.max_daily_hours(0), 6)
         self.assertEqual(rules.max_daily_hours(1), 6)
-        self.assertEqual(rules.max_daily_hours(2), 7)
-        self.assertEqual(rules.max_daily_hours(3), 8)
-        self.assertEqual(rules.max_daily_hours(4), 9)
+        self.assertEqual(rules.max_daily_hours(2), 6)
+        self.assertEqual(rules.max_daily_hours(3), 7)
+        self.assertEqual(rules.max_daily_hours(4), 8)
 
     def test_overtime_multiplier_pct(self):
         self.assertEqual(rules.overtime_multiplier_pct(0), 100)

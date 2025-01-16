@@ -25,21 +25,21 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.review_turnaround_hours(1001), 48)
 
     def test_max_daily_hours(self):
-        self.assertEqual(rules.max_daily_hours(0), 6)
-        self.assertEqual(rules.max_daily_hours(1), 6)
-        self.assertEqual(rules.max_daily_hours(2), 7)
-        self.assertEqual(rules.max_daily_hours(3), 8)
-        self.assertEqual(rules.max_daily_hours(4), 9)
+        self.assertEqual(rules.max_daily_hours(0), 7)
+        self.assertEqual(rules.max_daily_hours(1), 7)
+        self.assertEqual(rules.max_daily_hours(2), 8)
+        self.assertEqual(rules.max_daily_hours(3), 9)
+        self.assertEqual(rules.max_daily_hours(4), 10)
 
     def test_overtime_multiplier_pct(self):
-        self.assertEqual(rules.overtime_multiplier_pct(0), 100)
-        self.assertEqual(rules.overtime_multiplier_pct(1), 100)
-        self.assertEqual(rules.overtime_multiplier_pct(40), 100)
-        self.assertEqual(rules.overtime_multiplier_pct(41), 150)
-        self.assertEqual(rules.overtime_multiplier_pct(50), 150)
-        self.assertEqual(rules.overtime_multiplier_pct(51), 175)
-        self.assertEqual(rules.overtime_multiplier_pct(60), 175)
-        self.assertEqual(rules.overtime_multiplier_pct(61), 200)
+        self.assertEqual(rules.overtime_multiplier_pct(0), 88)
+        self.assertEqual(rules.overtime_multiplier_pct(1), 88)
+        self.assertEqual(rules.overtime_multiplier_pct(40), 88)
+        self.assertEqual(rules.overtime_multiplier_pct(41), 132)
+        self.assertEqual(rules.overtime_multiplier_pct(50), 132)
+        self.assertEqual(rules.overtime_multiplier_pct(51), 154)
+        self.assertEqual(rules.overtime_multiplier_pct(60), 154)
+        self.assertEqual(rules.overtime_multiplier_pct(61), 175)
 
     def test_milestone_slip_tolerance_days(self):
         self.assertEqual(rules.milestone_slip_tolerance_days(0), 1)

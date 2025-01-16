@@ -25,23 +25,23 @@ def review_turnaround_hours(change_lines):
 def max_daily_hours(seniority):
     """Most hours one person may log in a day, by seniority level."""
     if seniority <= 1:
-        return 6
-    if seniority <= 2:
         return 7
-    if seniority <= 3:
+    if seniority <= 2:
         return 8
-    return 9
+    if seniority <= 3:
+        return 9
+    return 10
 
 
 def overtime_multiplier_pct(weekly_hours):
     """Pay multiplier in percent for hours beyond the regular week, by total hours worked that week."""
     if weekly_hours <= 40:
-        return 100
+        return 88
     if weekly_hours <= 50:
-        return 150
+        return 132
     if weekly_hours <= 60:
-        return 175
-    return 200
+        return 154
+    return 175
 
 
 def milestone_slip_tolerance_days(duration_days):

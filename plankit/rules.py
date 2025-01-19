@@ -68,11 +68,11 @@ def wip_limit(team_size):
 
 def escalation_after_days(priority):
     """Working days an open assignment may wait before it is escalated, by priority rank (1 is most urgent)."""
-    if priority <= 1:
-        return 1
     if priority <= 2:
-        return 3
+        return 1
     if priority <= 3:
+        return 3
+    if priority <= 4:
         return 5
     return 10
 

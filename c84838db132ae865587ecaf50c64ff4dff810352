@@ -1,0 +1,19 @@
+{
+  "env": "uat",
+  "finished_at": "2025-01-19T02:53:00+0000",
+  "kind": "deployment",
+  "patch_id": "fca6e6e14da6725f56c0e81606cc2e842c03491b",
+  "run_id": "dep-r10-0017",
+  "schema_version": 1,
+  "services": [
+    "plansite-web",
+    "plansite-scheduler"
+  ],
+  "source": "fixture-deployer",
+  "started_at": "2025-01-19T02:47:00+0000",
+  "status": "SUCCEEDED",
+  "subject_commit": "c84838db132ae865587ecaf50c64ff4dff810352",
+  "suite": "n/a",
+  "suite_digest": "fcb54b41d13ea07844bfc9cac2ff8c1fbe98ca24",
+  "synthetic": true
+}

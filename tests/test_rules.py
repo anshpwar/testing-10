@@ -55,11 +55,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.wip_limit(0), 2)
         self.assertEqual(rules.wip_limit(1), 2)
         self.assertEqual(rules.wip_limit(3), 2)
-        self.assertEqual(rules.wip_limit(4), 4)
+        self.assertEqual(rules.wip_limit(4), 2)
         self.assertEqual(rules.wip_limit(6), 4)
-        self.assertEqual(rules.wip_limit(7), 7)
+        self.assertEqual(rules.wip_limit(7), 4)
         self.assertEqual(rules.wip_limit(12), 7)
-        self.assertEqual(rules.wip_limit(13), 10)
+        self.assertEqual(rules.wip_limit(13), 7)
 
     def test_escalation_after_days(self):
         self.assertEqual(rules.escalation_after_days(0), 1)

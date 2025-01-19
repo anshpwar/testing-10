@@ -57,11 +57,11 @@ def milestone_slip_tolerance_days(duration_days):
 
 def wip_limit(team_size):
     """Items that may be in progress at once, by team size."""
-    if team_size <= 3:
+    if team_size <= 4:
         return 2
-    if team_size <= 6:
+    if team_size <= 7:
         return 4
-    if team_size <= 12:
+    if team_size <= 13:
         return 7
     return 10
 

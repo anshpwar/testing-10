@@ -1,0 +1,15 @@
+{
+  "env": "uat",
+  "finished_at": "2025-01-19T02:51:00+0000",
+  "kind": "test-run",
+  "patch_id": null,
+  "run_id": "run-r10-0018",
+  "schema_version": 1,
+  "source": "fixture-ci",
+  "started_at": "2025-01-19T02:47:00+0000",
+  "status": "PASSED",
+  "subject_commit": "ce68f1dae5424590c173ed955939e4740c559535",
+  "suite": "all",
+  "suite_digest": "a2954d634eca04ff999fccf96553d76c8f3a4b7b",
+  "synthetic": true
+}

@@ -157,12 +157,12 @@ def holiday_cover_pct(team_size):
 def baseline_freeze_days(duration_days):
     """Working days before the due date during which a milestone baseline is frozen, by milestone length in working days."""
     if duration_days <= 30:
-        return 3
+        return 4
     if duration_days <= 90:
-        return 7
+        return 8
     if duration_days <= 180:
-        return 14
-    return 28
+        return 15
+    return 30
 
 
 def estimate_confidence_pct(task_count):

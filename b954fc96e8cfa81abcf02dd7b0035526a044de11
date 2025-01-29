@@ -1,0 +1,21 @@
+{
+  "env": "prod",
+  "finished_at": "2025-01-29T11:16:00+0000",
+  "kind": "deployment",
+  "patch_id": "c4fff2a782de73288bdd9c43c5318b187dfb57b6",
+  "run_id": "dep-r10-0030",
+  "schema_version": 1,
+  "services": [
+    "plansite-web"
+  ],
+  "services_pending": [
+    "plansite-scheduler"
+  ],
+  "source": "fixture-deployer",
+  "started_at": "2025-01-29T11:10:00+0000",
+  "status": "PARTIAL",
+  "subject_commit": "b954fc96e8cfa81abcf02dd7b0035526a044de11",
+  "suite": "n/a",
+  "suite_digest": "bc48420b734d2455ae3e28a71e2bf957d3d6ff94",
+  "synthetic": true
+}

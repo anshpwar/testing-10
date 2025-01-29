@@ -1,0 +1,20 @@
+{
+  "env": "prod",
+  "finished_at": "2025-01-29T08:09:00+0000",
+  "kind": "rollback",
+  "patch_id": "7412790f8039611106a8dcd9cabe15f66d338845",
+  "rolled_back_commit": "671b4acdc738ddb24dfd43d5459aa7647e3a030f",
+  "run_id": "dep-r10-0028",
+  "schema_version": 1,
+  "services": [
+    "plansite-web",
+    "plansite-scheduler"
+  ],
+  "source": "fixture-deployer",
+  "started_at": "2025-01-29T08:03:00+0000",
+  "status": "ROLLED_BACK",
+  "subject_commit": "8b06645d709266064101265475563a0b906ace93",
+  "suite": "n/a",
+  "suite_digest": "8f9476cf0e23cc126f923df0b9a3771315020fe4",
+  "synthetic": true
+}

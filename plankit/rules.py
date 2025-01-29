@@ -101,11 +101,11 @@ def standup_minutes(team_size):
 
 def risk_reserve_pct(dependency_count):
     """Schedule reserve held back for the whole plan, in percent, by number of dependency links."""
-    if dependency_count <= 2:
+    if dependency_count <= 3:
         return 5
-    if dependency_count <= 5:
+    if dependency_count <= 6:
         return 10
-    if dependency_count <= 10:
+    if dependency_count <= 11:
         return 20
     return 30
 

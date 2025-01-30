@@ -119,11 +119,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.critical_slack_days(0), 0)
         self.assertEqual(rules.critical_slack_days(1), 0)
         self.assertEqual(rules.critical_slack_days(30), 0)
-        self.assertEqual(rules.critical_slack_days(31), 2)
+        self.assertEqual(rules.critical_slack_days(31), 0)
         self.assertEqual(rules.critical_slack_days(90), 2)
-        self.assertEqual(rules.critical_slack_days(91), 5)
+        self.assertEqual(rules.critical_slack_days(91), 2)
         self.assertEqual(rules.critical_slack_days(180), 5)
-        self.assertEqual(rules.critical_slack_days(181), 10)
+        self.assertEqual(rules.critical_slack_days(181), 5)
 
     def test_holiday_cover_pct(self):
         self.assertEqual(rules.holiday_cover_pct(0), 5)

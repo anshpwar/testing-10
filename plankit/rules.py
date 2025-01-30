@@ -123,11 +123,11 @@ def timesheet_lock_days(team_size):
 
 def sprint_length_days(team_size):
     """Working days in one sprint, by team size."""
-    if team_size <= 5:
+    if team_size <= 6:
         return 5
-    if team_size <= 10:
+    if team_size <= 11:
         return 10
-    if team_size <= 20:
+    if team_size <= 22:
         return 14
     return 21
 

@@ -106,14 +106,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.timesheet_lock_days(51), 2)
 
     def test_sprint_length_days(self):
-        self.assertEqual(rules.sprint_length_days(0), 5)
-        self.assertEqual(rules.sprint_length_days(1), 5)
-        self.assertEqual(rules.sprint_length_days(5), 5)
-        self.assertEqual(rules.sprint_length_days(6), 10)
-        self.assertEqual(rules.sprint_length_days(10), 10)
-        self.assertEqual(rules.sprint_length_days(11), 14)
-        self.assertEqual(rules.sprint_length_days(20), 14)
-        self.assertEqual(rules.sprint_length_days(21), 21)
+        self.assertEqual(rules.sprint_length_days(0), 4)
+        self.assertEqual(rules.sprint_length_days(1), 4)
+        self.assertEqual(rules.sprint_length_days(5), 4)
+        self.assertEqual(rules.sprint_length_days(6), 9)
+        self.assertEqual(rules.sprint_length_days(10), 9)
+        self.assertEqual(rules.sprint_length_days(11), 13)
+        self.assertEqual(rules.sprint_length_days(20), 13)
+        self.assertEqual(rules.sprint_length_days(21), 19)
 
     def test_critical_slack_days(self):
         self.assertEqual(rules.critical_slack_days(0), 0)

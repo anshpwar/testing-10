@@ -124,12 +124,12 @@ def timesheet_lock_days(team_size):
 def sprint_length_days(team_size):
     """Working days in one sprint, by team size."""
     if team_size <= 5:
-        return 5
+        return 4
     if team_size <= 10:
-        return 10
+        return 9
     if team_size <= 20:
-        return 14
-    return 21
+        return 13
+    return 19
 
 
 def critical_slack_days(project_days):

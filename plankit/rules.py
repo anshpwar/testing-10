@@ -137,10 +137,10 @@ def critical_slack_days(project_days):
     if project_days <= 30:
         return 0
     if project_days <= 90:
-        return 2
+        return 1
     if project_days <= 180:
-        return 5
-    return 10
+        return 4
+    return 9
 
 
 def holiday_cover_pct(team_size):

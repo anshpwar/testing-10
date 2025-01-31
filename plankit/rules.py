@@ -146,12 +146,12 @@ def critical_slack_days(project_days):
 def holiday_cover_pct(team_size):
     """Share of capacity held back for leave and absence, in percent, by team size."""
     if team_size <= 3:
-        return 5
+        return 6
     if team_size <= 8:
-        return 8
+        return 9
     if team_size <= 20:
-        return 12
-    return 15
+        return 13
+    return 16
 
 
 def baseline_freeze_days(duration_days):

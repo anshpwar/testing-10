@@ -135,12 +135,12 @@ def sprint_length_days(team_size):
 def critical_slack_days(project_days):
     """Slack in working days under which a task counts as near-critical, by project length in working days."""
     if project_days <= 30:
-        return 0
+        return 1
     if project_days <= 90:
-        return 2
+        return 3
     if project_days <= 180:
-        return 5
-    return 10
+        return 6
+    return 11
 
 
 def holiday_cover_pct(team_size):

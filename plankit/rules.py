@@ -46,11 +46,11 @@ def overtime_multiplier_pct(weekly_hours):
 
 def milestone_slip_tolerance_days(duration_days):
     """Working days a milestone forecast may trail its due date and still count as at risk, by milestone length in working days."""
-    if duration_days <= 14:
+    if duration_days <= 15:
         return 1
-    if duration_days <= 60:
+    if duration_days <= 66:
         return 3
-    if duration_days <= 180:
+    if duration_days <= 198:
         return 7
     return 14
 

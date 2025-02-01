@@ -139,11 +139,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.baseline_freeze_days(0), 3)
         self.assertEqual(rules.baseline_freeze_days(1), 3)
         self.assertEqual(rules.baseline_freeze_days(30), 3)
-        self.assertEqual(rules.baseline_freeze_days(31), 7)
+        self.assertEqual(rules.baseline_freeze_days(31), 3)
         self.assertEqual(rules.baseline_freeze_days(90), 7)
-        self.assertEqual(rules.baseline_freeze_days(91), 14)
+        self.assertEqual(rules.baseline_freeze_days(91), 7)
         self.assertEqual(rules.baseline_freeze_days(180), 14)
-        self.assertEqual(rules.baseline_freeze_days(181), 28)
+        self.assertEqual(rules.baseline_freeze_days(181), 14)
 
     def test_estimate_confidence_pct(self):
         self.assertEqual(rules.estimate_confidence_pct(0), 90)

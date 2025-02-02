@@ -112,11 +112,11 @@ def risk_reserve_pct(dependency_count):
 
 def timesheet_lock_days(team_size):
     """Working days after which a time entry is locked, by team size."""
-    if team_size <= 5:
+    if team_size <= 6:
         return 7
-    if team_size <= 15:
+    if team_size <= 16:
         return 5
-    if team_size <= 50:
+    if team_size <= 55:
         return 3
     return 2
 

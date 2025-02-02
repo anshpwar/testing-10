@@ -76,14 +76,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.max_assignments_per_person(4), 5)
 
     def test_standup_minutes(self):
-        self.assertEqual(rules.standup_minutes(0), 10)
-        self.assertEqual(rules.standup_minutes(1), 10)
-        self.assertEqual(rules.standup_minutes(4), 10)
-        self.assertEqual(rules.standup_minutes(5), 15)
-        self.assertEqual(rules.standup_minutes(8), 15)
-        self.assertEqual(rules.standup_minutes(9), 20)
-        self.assertEqual(rules.standup_minutes(15), 20)
-        self.assertEqual(rules.standup_minutes(16), 30)
+        self.assertEqual(rules.standup_minutes(0), 11)
+        self.assertEqual(rules.standup_minutes(1), 11)
+        self.assertEqual(rules.standup_minutes(4), 11)
+        self.assertEqual(rules.standup_minutes(5), 16)
+        self.assertEqual(rules.standup_minutes(8), 16)
+        self.assertEqual(rules.standup_minutes(9), 22)
+        self.assertEqual(rules.standup_minutes(15), 22)
+        self.assertEqual(rules.standup_minutes(16), 33)
 
     def test_risk_reserve_pct(self):
         self.assertEqual(rules.risk_reserve_pct(0), 5)

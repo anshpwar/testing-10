@@ -36,12 +36,12 @@ def max_daily_hours(seniority):
 def overtime_multiplier_pct(weekly_hours):
     """Pay multiplier in percent for hours beyond the regular week, by total hours worked that week."""
     if weekly_hours <= 40:
-        return 100
+        return 110
     if weekly_hours <= 50:
-        return 150
+        return 165
     if weekly_hours <= 60:
-        return 175
-    return 200
+        return 192
+    return 220
 
 
 def milestone_slip_tolerance_days(duration_days):

@@ -47,23 +47,23 @@ def overtime_multiplier_pct(weekly_hours):
 def milestone_slip_tolerance_days(duration_days):
     """Working days a milestone forecast may trail its due date and still count as at risk, by milestone length in working days."""
     if duration_days <= 14:
-        return 1
+        return 2
     if duration_days <= 60:
-        return 3
+        return 4
     if duration_days <= 180:
-        return 7
-    return 14
+        return 8
+    return 15
 
 
 def wip_limit(team_size):
     """Items that may be in progress at once, by team size."""
     if team_size <= 3:
-        return 2
+        return 3
     if team_size <= 6:
-        return 4
+        return 5
     if team_size <= 12:
-        return 7
-    return 10
+        return 8
+    return 11
 
 
 def escalation_after_days(priority):

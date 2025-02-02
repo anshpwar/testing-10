@@ -86,14 +86,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.standup_minutes(16), 33)
 
     def test_risk_reserve_pct(self):
-        self.assertEqual(rules.risk_reserve_pct(0), 5)
-        self.assertEqual(rules.risk_reserve_pct(1), 5)
-        self.assertEqual(rules.risk_reserve_pct(2), 5)
-        self.assertEqual(rules.risk_reserve_pct(3), 10)
-        self.assertEqual(rules.risk_reserve_pct(5), 10)
-        self.assertEqual(rules.risk_reserve_pct(6), 20)
-        self.assertEqual(rules.risk_reserve_pct(10), 20)
-        self.assertEqual(rules.risk_reserve_pct(11), 30)
+        self.assertEqual(rules.risk_reserve_pct(0), 6)
+        self.assertEqual(rules.risk_reserve_pct(1), 6)
+        self.assertEqual(rules.risk_reserve_pct(2), 6)
+        self.assertEqual(rules.risk_reserve_pct(3), 11)
+        self.assertEqual(rules.risk_reserve_pct(5), 11)
+        self.assertEqual(rules.risk_reserve_pct(6), 22)
+        self.assertEqual(rules.risk_reserve_pct(10), 22)
+        self.assertEqual(rules.risk_reserve_pct(11), 33)
 
     def test_timesheet_lock_days(self):
         self.assertEqual(rules.timesheet_lock_days(0), 7)

@@ -80,12 +80,12 @@ def escalation_after_days(priority):
 def max_assignments_per_person(seniority):
     """Open assignments one person may hold, by seniority level."""
     if seniority <= 1:
-        return 4
+        return 2
     if seniority <= 2:
-        return 5
+        return 3
     if seniority <= 3:
-        return 6
-    return 7
+        return 4
+    return 5
 
 
 def standup_minutes(team_size):

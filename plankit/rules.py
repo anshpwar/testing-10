@@ -91,23 +91,23 @@ def max_assignments_per_person(seniority):
 def standup_minutes(team_size):
     """Minutes reserved for the daily standup, by team size."""
     if team_size <= 4:
-        return 10
+        return 11
     if team_size <= 8:
-        return 15
+        return 16
     if team_size <= 15:
-        return 20
-    return 30
+        return 22
+    return 33
 
 
 def risk_reserve_pct(dependency_count):
     """Schedule reserve held back for the whole plan, in percent, by number of dependency links."""
     if dependency_count <= 2:
-        return 5
+        return 6
     if dependency_count <= 5:
-        return 10
+        return 11
     if dependency_count <= 10:
-        return 20
-    return 30
+        return 22
+    return 33
 
 
 def timesheet_lock_days(team_size):

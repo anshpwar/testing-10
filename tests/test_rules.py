@@ -52,14 +52,14 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.milestone_slip_tolerance_days(181), 14)
 
     def test_wip_limit(self):
-        self.assertEqual(rules.wip_limit(0), 2)
-        self.assertEqual(rules.wip_limit(1), 2)
-        self.assertEqual(rules.wip_limit(3), 2)
-        self.assertEqual(rules.wip_limit(4), 4)
-        self.assertEqual(rules.wip_limit(6), 4)
-        self.assertEqual(rules.wip_limit(7), 7)
-        self.assertEqual(rules.wip_limit(12), 7)
-        self.assertEqual(rules.wip_limit(13), 10)
+        self.assertEqual(rules.wip_limit(0), 1)
+        self.assertEqual(rules.wip_limit(1), 1)
+        self.assertEqual(rules.wip_limit(3), 1)
+        self.assertEqual(rules.wip_limit(4), 3)
+        self.assertEqual(rules.wip_limit(6), 3)
+        self.assertEqual(rules.wip_limit(7), 6)
+        self.assertEqual(rules.wip_limit(12), 6)
+        self.assertEqual(rules.wip_limit(13), 9)
 
     def test_escalation_after_days(self):
         self.assertEqual(rules.escalation_after_days(0), 1)

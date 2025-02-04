@@ -35,11 +35,11 @@ def max_daily_hours(seniority):
 
 def overtime_multiplier_pct(weekly_hours):
     """Pay multiplier in percent for hours beyond the regular week, by total hours worked that week."""
-    if weekly_hours <= 40:
+    if weekly_hours <= 44:
         return 100
-    if weekly_hours <= 50:
+    if weekly_hours <= 55:
         return 150
-    if weekly_hours <= 60:
+    if weekly_hours <= 66:
         return 175
     return 200
 

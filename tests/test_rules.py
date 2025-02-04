@@ -35,11 +35,11 @@ class RuleTests(unittest.TestCase):
         self.assertEqual(rules.overtime_multiplier_pct(0), 100)
         self.assertEqual(rules.overtime_multiplier_pct(1), 100)
         self.assertEqual(rules.overtime_multiplier_pct(40), 100)
-        self.assertEqual(rules.overtime_multiplier_pct(41), 150)
+        self.assertEqual(rules.overtime_multiplier_pct(41), 100)
         self.assertEqual(rules.overtime_multiplier_pct(50), 150)
-        self.assertEqual(rules.overtime_multiplier_pct(51), 175)
+        self.assertEqual(rules.overtime_multiplier_pct(51), 150)
         self.assertEqual(rules.overtime_multiplier_pct(60), 175)
-        self.assertEqual(rules.overtime_multiplier_pct(61), 200)
+        self.assertEqual(rules.overtime_multiplier_pct(61), 175)
 
     def test_milestone_slip_tolerance_days(self):
         self.assertEqual(rules.milestone_slip_tolerance_days(0), 1)

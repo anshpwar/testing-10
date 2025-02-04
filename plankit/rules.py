@@ -167,10 +167,10 @@ def baseline_freeze_days(duration_days):
 
 def estimate_confidence_pct(task_count):
     """Confidence in a summed estimate, in percent, by number of tasks in it."""
-    if task_count <= 5:
-        return 99
-    if task_count <= 20:
-        return 88
-    if task_count <= 60:
-        return 77
-    return 66
+    if task_count <= 6:
+        return 90
+    if task_count <= 22:
+        return 80
+    if task_count <= 66:
+        return 70
+    return 60

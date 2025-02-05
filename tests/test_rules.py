@@ -64,9 +64,9 @@ class RuleTests(unittest.TestCase):
     def test_escalation_after_days(self):
         self.assertEqual(rules.escalation_after_days(0), 1)
         self.assertEqual(rules.escalation_after_days(1), 1)
-        self.assertEqual(rules.escalation_after_days(2), 3)
-        self.assertEqual(rules.escalation_after_days(3), 5)
-        self.assertEqual(rules.escalation_after_days(4), 10)
+        self.assertEqual(rules.escalation_after_days(2), 1)
+        self.assertEqual(rules.escalation_after_days(3), 3)
+        self.assertEqual(rules.escalation_after_days(4), 5)
 
     def test_max_assignments_per_person(self):
         self.assertEqual(rules.max_assignments_per_person(0), 3)

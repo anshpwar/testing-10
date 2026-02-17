@@ -1,0 +1,106 @@
+[
+  {
+    "scenario_id": "S066",
+    "catalog_ids": [
+      66
+    ],
+    "difficulty": 2,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Revert of a tuned rule collides with a later edit to the same tier"
+  },
+  {
+    "scenario_id": "S031",
+    "catalog_ids": [
+      31
+    ],
+    "difficulty": 2,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Test record without execution times beside a concurrent edit"
+  },
+  {
+    "scenario_id": "S049",
+    "catalog_ids": [
+      49
+    ],
+    "difficulty": 2,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Second history with timestamp-less test records"
+  },
+  {
+    "scenario_id": "S051",
+    "catalog_ids": [
+      51
+    ],
+    "difficulty": 2,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Second history with a hand-resolved revert"
+  },
+  {
+    "scenario_id": "S059",
+    "catalog_ids": [
+      59
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Commits rebased onto a new base while the other side keeps tuning"
+  },
+  {
+    "scenario_id": "S042",
+    "catalog_ids": [
+      42
+    ],
+    "difficulty": 3,
+    "expected_git_outcome": "EVIDENCE_ONLY",
+    "title": "Partial rollout reported alongside a passing test record"
+  },
+  {
+    "scenario_id": "S039",
+    "catalog_ids": [
+      39,
+      41,
+      42
+    ],
+    "difficulty": 4,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Concurrent policy edits with mixed deployment and test records"
+  },
+  {
+    "scenario_id": "S086",
+    "catalog_ids": [
+      86,
+      30,
+      27
+    ],
+    "difficulty": 4,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Concurrent edits to a policy table beside a shared helper"
+  },
+  {
+    "scenario_id": "S060",
+    "catalog_ids": [
+      60,
+      53,
+      54,
+      11,
+      59,
+      19
+    ],
+    "difficulty": 5,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Long history with several overlapping edits and mixed provenance"
+  },
+  {
+    "scenario_id": "S052",
+    "catalog_ids": [
+      52,
+      84,
+      86,
+      88,
+      85,
+      51
+    ],
+    "difficulty": 5,
+    "expected_git_outcome": "CONFLICT",
+    "title": "Composite history across several policy and helper changes"
+  }
+]

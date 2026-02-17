@@ -1,0 +1,88 @@
+{
+  "scenario_id": "S031",
+  "repo_id": "testing-10",
+  "title": "Test record without execution times beside a concurrent edit",
+  "difficulty": 2,
+  "primary_catalog_id": 31,
+  "catalog_ids": [
+    31
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S031/base",
+    "target": "scenario/S031/target",
+    "all_pairs": [
+      [
+        "scenario/S031/base",
+        "scenario/S031/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S031/base",
+    "scenario/S031/target"
+  ],
+  "original_commits": [
+    "98a3f154228f517b0ae60e11ff0ae9d7e598bfce"
+  ],
+  "derived_commits": [
+    "8895a1080eb430af6674adaa42fc4a1ce60a673c"
+  ],
+  "change_relationships": [
+    {
+      "a": "98a3f154228f517b0ae60e11ff0ae9d7e598bfce",
+      "b": "8895a1080eb430af6674adaa42fc4a1ce60a673c",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "wip_limit"
+    }
+  ],
+  "testing_evidence": "t1 PASSED but started_at/finished_at are null",
+  "deployment_evidence": "none",
+  "metadata_availability": "timestamps missing",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "execution time cannot be established; freshness unknown"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "note",
+      "ref": "ci",
+      "commit": "98a3f154228f517b0ae60e11ff0ae9d7e598bfce",
+      "expect": "present",
+      "fields": {
+        "started_at": null,
+        "finished_at": null
+      }
+    }
+  ],
+  "id": "31",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S031.t1": "3d060761a2fb151f1c56c04aff194b33b066897c",
+    "@S031.b1": "1f67cdb4b5ae90b5668380adc84d8741f8eb5171"
+  },
+  "commit_labels": {
+    "S031.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S031.b1": "8895a1080eb430af6674adaa42fc4a1ce60a673c",
+    "S031.t1": "98a3f154228f517b0ae60e11ff0ae9d7e598bfce"
+  }
+}

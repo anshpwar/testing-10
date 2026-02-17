@@ -1,0 +1,75 @@
+scenario_id: S059
+repo_id: testing-10
+title: Commits rebased onto a new base while the other side keeps tuning
+difficulty: 3
+primary_catalog_id: 59
+catalog_ids:
+- 59
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S059/base
+  target: scenario/S059/target
+  all_pairs:
+  - - scenario/S059/base
+    - scenario/S059/target
+  additional_sides:
+    newbase: scenario/S059/newbase
+fork_commit: '@S059.F'
+expected_conflicted_files:
+- plankit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S059/base
+- scenario/S059/newbase
+- scenario/S059/target
+original_commits:
+- '@S059.c1'
+- '@S059.c2'
+derived_commits:
+- '@S059.n1'
+- '@S059.n2'
+change_relationships:
+- a: '@S059.c1'
+  b: '@S059.n1'
+  relation: identical
+- a: '@S059.c2'
+  b: '@S059.n2'
+  relation: identical
+files:
+- plankit/rules.py
+- tests/test_rules.py
+- docs/changelog.md
+regions:
+- file: plankit/rules.py
+  function: baseline_freeze_days
+- file: plankit/rules.py
+  function: estimate_confidence_pct
+testing_evidence: uat PASSED recorded on c2 against the old base
+deployment_evidence: none
+metadata_availability: full
+known_uncertainty: none
+expected_warnings:
+- rebased onto a different base; evidence is for the old base
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: patch_id_equal
+  a: '@S059.c2'
+  b: '@S059.n2'
+- type: ancestor
+  a: '@S059.f2'
+  b: '@S059.n2'
+  expect: true
+- type: ancestor
+  a: '@S059.f2'
+  b: branch:target
+  expect: false
+id: '59'
+sub_entries: []
+patch_ids:
+  '@S059.c1': 6b76107d4c4668e450be47ae56865bf476d6e0b3
+  '@S059.c2': 0d732000e30dbca22cf8d60af6ad4e8461b3ad56
+  '@S059.n1': 6b76107d4c4668e450be47ae56865bf476d6e0b3
+  '@S059.n2': 0d732000e30dbca22cf8d60af6ad4e8461b3ad56

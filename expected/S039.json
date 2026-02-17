@@ -1,0 +1,191 @@
+{
+  "scenario_id": "S039",
+  "repo_id": "testing-10",
+  "title": "Concurrent policy edits with mixed deployment and test records",
+  "difficulty": 4,
+  "primary_catalog_id": 39,
+  "catalog_ids": [
+    39,
+    41,
+    42
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S039/base",
+    "target": "scenario/S039/target",
+    "all_pairs": [
+      [
+        "scenario/S039/base",
+        "scenario/S039/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S039/base",
+    "scenario/S039/target"
+  ],
+  "original_commits": [
+    "ee2106efc3751f3a94aea96aaf86ae960aeb6b10"
+  ],
+  "derived_commits": [
+    "699c2141f9a5f093771984490f4f8555e41b2851"
+  ],
+  "change_relationships": [
+    {
+      "a": "ee2106efc3751f3a94aea96aaf86ae960aeb6b10",
+      "b": "699c2141f9a5f093771984490f4f8555e41b2851",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "escalation_after_days"
+    }
+  ],
+  "testing_evidence": "t1 PASSED in prod",
+  "deployment_evidence": "deploy record on t2 names t1 as the deployed commit",
+  "metadata_availability": "misattached deploy record",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "deployment record points at a different commit than it is attached to"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "note_subject_mismatch",
+      "ref": "deploy",
+      "commit": "699c2141f9a5f093771984490f4f8555e41b2851",
+      "subject": "ee2106efc3751f3a94aea96aaf86ae960aeb6b10"
+    }
+  ],
+  "id": "39",
+  "sub_entries": [
+    {
+      "original_commits": [
+        "671b4acdc738ddb24dfd43d5459aa7647e3a030f"
+      ],
+      "derived_commits": [
+        "8b06645d709266064101265475563a0b906ace93"
+      ],
+      "change_relationships": [
+        {
+          "a": "671b4acdc738ddb24dfd43d5459aa7647e3a030f",
+          "b": "8b06645d709266064101265475563a0b906ace93",
+          "relation": "reverted"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "risk_reserve_pct"
+        }
+      ],
+      "testing_evidence": "t1 PASSED in prod",
+      "deployment_evidence": "t1 deployed then rolled back by t2",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "change was rolled back; tested != currently deployed"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "note",
+          "ref": "deploy",
+          "commit": "8b06645d709266064101265475563a0b906ace93",
+          "expect": "present",
+          "fields": {
+            "status": "ROLLED_BACK"
+          }
+        }
+      ],
+      "id": "39.a",
+      "catalog_id": 41
+    },
+    {
+      "original_commits": [
+        "b954fc96e8cfa81abcf02dd7b0035526a044de11"
+      ],
+      "derived_commits": [
+        "d31d6e5b4141192dc4b009cdd4b37d0adf44368a"
+      ],
+      "change_relationships": [
+        {
+          "a": "b954fc96e8cfa81abcf02dd7b0035526a044de11",
+          "b": "d31d6e5b4141192dc4b009cdd4b37d0adf44368a",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "sprint_length_days"
+        }
+      ],
+      "testing_evidence": "t1 PASSED in prod",
+      "deployment_evidence": "t1 deployed to ['plansite-web'] only; remaining services pending",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "partial rollout; production is mixed"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "note",
+          "ref": "deploy",
+          "commit": "b954fc96e8cfa81abcf02dd7b0035526a044de11",
+          "expect": "present",
+          "fields": {
+            "status": "PARTIAL"
+          }
+        }
+      ],
+      "id": "39.b",
+      "catalog_id": 42
+    }
+  ],
+  "patch_ids": {
+    "@S039.t1": "91231f18ea0bf1b4a85595db4632bc5c8fba03a0",
+    "@S039.t2": "bebb8529d00e6a94f883721647fcb047ad316b83",
+    "@S039.c41_t1": "0074d477385f728107ac27fdfd11210766320d2a",
+    "@S039.c41_t2": "7412790f8039611106a8dcd9cabe15f66d338845",
+    "@S039.c42_t1": "c4fff2a782de73288bdd9c43c5318b187dfb57b6",
+    "@S039.c42_b1": "7ac12e1e13c82596e37ff7ad4815ba3624bafc90"
+  },
+  "commit_labels": {
+    "S039.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S039.b1": "c776893b06a2ee0cb56b177b03c5336439a688fb",
+    "S039.c41_b1": "e4a94135a3e7c0d22e96330f359132beaa97cfaa",
+    "S039.c41_t1": "671b4acdc738ddb24dfd43d5459aa7647e3a030f",
+    "S039.c41_t2": "8b06645d709266064101265475563a0b906ace93",
+    "S039.c42_b1": "d31d6e5b4141192dc4b009cdd4b37d0adf44368a",
+    "S039.c42_t1": "b954fc96e8cfa81abcf02dd7b0035526a044de11",
+    "S039.t1": "ee2106efc3751f3a94aea96aaf86ae960aeb6b10",
+    "S039.t2": "699c2141f9a5f093771984490f4f8555e41b2851"
+  }
+}

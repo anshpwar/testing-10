@@ -1,0 +1,131 @@
+{
+  "scenario_id": "S066",
+  "repo_id": "testing-10",
+  "title": "Revert of a tuned rule collides with a later edit to the same tier",
+  "difficulty": 2,
+  "primary_catalog_id": 66,
+  "catalog_ids": [
+    66
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S066/base",
+    "target": "scenario/S066/target",
+    "all_pairs": [
+      [
+        "scenario/S066/base",
+        "scenario/S066/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S066/base",
+    "scenario/S066/target"
+  ],
+  "original_commits": [
+    "c84838db132ae865587ecaf50c64ff4dff810352"
+  ],
+  "derived_commits": [
+    "ce68f1dae5424590c173ed955939e4740c559535"
+  ],
+  "change_relationships": [
+    {
+      "a": "c84838db132ae865587ecaf50c64ff4dff810352",
+      "b": "ce68f1dae5424590c173ed955939e4740c559535",
+      "relation": "reverted"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "max_daily_hours"
+    }
+  ],
+  "testing_evidence": "none",
+  "deployment_evidence": "none",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "revert conflicted with later edit and was resolved by hand"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "behavior",
+      "a": "ce68f1dae5424590c173ed955939e4740c559535",
+      "b": "cbb44fbdca000bb646ef29caca5074796648cc9c",
+      "function": "max_daily_hours",
+      "expect": "equal",
+      "file": "plankit/rules.py",
+      "points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "id": "66",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S066.c1": "fca6e6e14da6725f56c0e81606cc2e842c03491b",
+    "@S066.rv": null
+  },
+  "commit_labels": {
+    "S066.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S066.c1": "c84838db132ae865587ecaf50c64ff4dff810352",
+    "S066.c2": "cbb44fbdca000bb646ef29caca5074796648cc9c",
+    "S066.rv": "ce68f1dae5424590c173ed955939e4740c559535",
+    "S066.t1": "959f7892c7ead6ff12964eda8adff93a199ed951"
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "scenario_id": "S086",
+  "repo_id": "testing-10",
+  "title": "Concurrent edits to a policy table beside a shared helper",
+  "difficulty": 4,
+  "primary_catalog_id": 86,
+  "catalog_ids": [
+    86,
+    30,
+    27
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S086/base",
+    "target": "scenario/S086/target",
+    "all_pairs": [
+      [
+        "scenario/S086/base",
+        "scenario/S086/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S086/base",
+    "scenario/S086/target"
+  ],
+  "original_commits": [
+    "7bb52bcac1a66c0a2b9e3b7eee5b8d6dd2966df4"
+  ],
+  "derived_commits": [
+    "c0a7342b62a5c05604694f34d85b73c33ff53a42",
+    "9d7d68ee77478ea047004456436b29894856127c"
+  ],
+  "change_relationships": [
+    {
+      "a": "7bb52bcac1a66c0a2b9e3b7eee5b8d6dd2966df4",
+      "b": "c0a7342b62a5c05604694f34d85b73c33ff53a42",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "risk_reserve_pct"
+    }
+  ],
+  "testing_evidence": "run_id run-r10-0031 reused on three unrelated commits with conflicting statuses",
+  "deployment_evidence": "none",
+  "metadata_availability": "duplicate evidence identifiers",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "run_id is not unique; none of the records can be trusted"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": true,
+  "assertions": [
+    {
+      "type": "note_field_equal_across",
+      "ref": "ci",
+      "commits": [
+        "7bb52bcac1a66c0a2b9e3b7eee5b8d6dd2966df4",
+        "c0a7342b62a5c05604694f34d85b73c33ff53a42",
+        "9d7d68ee77478ea047004456436b29894856127c"
+      ],
+      "field": "run_id"
+    }
+  ],
+  "id": "86",
+  "sub_entries": [
+    {
+      "original_commits": [
+        "2fb4537c288d097bffc2f65a9f39250fdcf1e94b"
+      ],
+      "derived_commits": [
+        "c0b871a95344dcfa0507e51a35b6f11cab36a955"
+      ],
+      "change_relationships": [
+        {
+          "a": "2fb4537c288d097bffc2f65a9f39250fdcf1e94b",
+          "b": "c0b871a95344dcfa0507e51a35b6f11cab36a955",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "sprint_length_days"
+        }
+      ],
+      "testing_evidence": "ci says PASSED, the authoritative release-board attestation says FAILED",
+      "deployment_evidence": "none",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "contradictory records for one commit"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": true,
+      "assertions": [
+        {
+          "type": "note",
+          "ref": "ci",
+          "commit": "2fb4537c288d097bffc2f65a9f39250fdcf1e94b",
+          "expect": "present",
+          "fields": {
+            "status": "PASSED"
+          }
+        },
+        {
+          "type": "note",
+          "ref": "provenance",
+          "commit": "2fb4537c288d097bffc2f65a9f39250fdcf1e94b",
+          "expect": "present",
+          "fields": {
+            "status": "FAILED",
+            "authoritative": true
+          }
+        }
+      ],
+      "id": "86.a",
+      "catalog_id": 30
+    },
+    {
+      "original_commits": [
+        "c4b05110c23782393c02de4afb75c2bdbc0da53d"
+      ],
+      "derived_commits": [
+        "91d794d8c5cfe468b3ec9d88744b740eca5ea595"
+      ],
+      "change_relationships": [
+        {
+          "a": "c4b05110c23782393c02de4afb75c2bdbc0da53d",
+          "b": "91d794d8c5cfe468b3ec9d88744b740eca5ea595",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "critical_slack_days"
+        }
+      ],
+      "testing_evidence": "record stored on t2 describes t1; t1 itself has no record",
+      "deployment_evidence": "none",
+      "metadata_availability": "misattached record",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "note attached to a commit whose subject_commit names another commit"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "note_subject_mismatch",
+          "ref": "ci",
+          "commit": "91d794d8c5cfe468b3ec9d88744b740eca5ea595",
+          "subject": "c4b05110c23782393c02de4afb75c2bdbc0da53d"
+        },
+        {
+          "type": "note",
+          "ref": "ci",
+          "commit": "c4b05110c23782393c02de4afb75c2bdbc0da53d",
+          "expect": "absent"
+        }
+      ],
+      "id": "86.b",
+      "catalog_id": 27
+    }
+  ],
+  "patch_ids": {
+    "@S086.t1": "0074d477385f728107ac27fdfd11210766320d2a",
+    "@S086.b1": "a6cd0f7dffd3dad8240e687b1655d49413d93e2a",
+    "@S086.t2": "c6876a6e6aaec96271b4716635bf3ef7355a6ca7",
+    "@S086.c30_t1": "c4fff2a782de73288bdd9c43c5318b187dfb57b6",
+    "@S086.c30_b1": "e351526e3eb75006ca407a67664ae7f1a2837fd1",
+    "@S086.c27_t1": "3497274c29284c2ec9fb2f0092ae8f116ab62e95",
+    "@S086.c27_t2": "d4e7137bb80bf68eeac7ee304453ffe8ecf6c879"
+  },
+  "commit_labels": {
+    "S086.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S086.b1": "c0a7342b62a5c05604694f34d85b73c33ff53a42",
+    "S086.c27_b1": "2a194e56c101aa70bc57d8426a694aa6909ba736",
+    "S086.c27_t1": "c4b05110c23782393c02de4afb75c2bdbc0da53d",
+    "S086.c27_t2": "91d794d8c5cfe468b3ec9d88744b740eca5ea595",
+    "S086.c30_b1": "c0b871a95344dcfa0507e51a35b6f11cab36a955",
+    "S086.c30_t1": "2fb4537c288d097bffc2f65a9f39250fdcf1e94b",
+    "S086.t1": "7bb52bcac1a66c0a2b9e3b7eee5b8d6dd2966df4",
+    "S086.t2": "9d7d68ee77478ea047004456436b29894856127c"
+  }
+}

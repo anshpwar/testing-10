@@ -1,0 +1,324 @@
+scenario_id: S060
+repo_id: testing-10
+title: Long history with several overlapping edits and mixed provenance
+difficulty: 5
+primary_catalog_id: 60
+catalog_ids:
+- 60
+- 53
+- 54
+- 11
+- 59
+- 19
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S060/base
+  target: scenario/S060/target
+  all_pairs:
+  - - scenario/S060/base
+    - scenario/S060/target
+  additional_sides:
+    c54_feature: scenario/S060/c54_feature
+    c59_newbase: scenario/S060/c59_newbase
+    newbase: scenario/S060/newbase
+    origin: scenario/S060/origin
+fork_commit: '@S060.F'
+expected_conflicted_files:
+- plankit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S060/base
+- scenario/S060/c54_feature
+- scenario/S060/c59_newbase
+- scenario/S060/newbase
+- scenario/S060/origin
+- scenario/S060/target
+original_commits:
+- '@S060.o1'
+- '@S060.o2'
+- '@S060.c3'
+derived_commits:
+- '@S060.n1'
+- '@S060.n2'
+change_relationships:
+- a: '@S060.o1'
+  b: '@S060.n1'
+  relation: combined
+- a: '@S060.o2'
+  b: '@S060.n1'
+  relation: combined
+- a: '@S060.c3'
+  b: '@S060.n2'
+  relation: identical
+files:
+- plankit/rules.py
+- tests/test_rules.py
+- docs/changelog.md
+regions:
+- file: plankit/rules.py
+  function: milestone_slip_tolerance_days
+- file: plankit/rules.py
+  function: wip_limit
+- file: plankit/rules.py
+  function: escalation_after_days
+testing_evidence: prod PASSED on origin o1; none of the rewritten commits carry a record
+deployment_evidence: none
+metadata_availability: two pre-rewrite tips kept as archive tags
+known_uncertainty: none
+expected_warnings:
+- cherry-pick, squash and rebase applied in sequence; lineage not in trailers
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: diff_subset
+  small:
+  - '@S060.o1'
+  - '@S060.o2'
+  big: '@S060.n1'
+- type: ancestor
+  a: '@S060.f2'
+  b: '@S060.n2'
+  expect: true
+- type: ref_exists
+  ref: refs/tags/archive/S060-pre-rewrite
+- type: ref_exists
+  ref: refs/tags/archive/S060-pre-rewrite-2
+id: '60'
+sub_entries:
+- original_commits:
+  - '@S060.c53_c1'
+  - '@S060.c53_c2'
+  - '@S060.c53_c3'
+  derived_commits:
+  - '@S060.c53_n1'
+  - '@S060.c53_n2'
+  change_relationships:
+  - a: '@S060.c53_c1'
+    b: '@S060.c53_n1'
+    relation: combined
+  - a: '@S060.c53_c3'
+    b: '@S060.c53_n1'
+    relation: combined
+  - a: '@S060.c53_c2'
+    b: '@S060.c53_n2'
+    relation: identical
+  files:
+  - plankit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: plankit/rules.py
+    function: critical_slack_days
+  - file: plankit/rules.py
+    function: holiday_cover_pct
+  testing_evidence: ci PASSED recorded on pre-rewrite c1 only
+  deployment_evidence: none
+  metadata_availability: pre-rewrite tip kept as tag archive/S060-pre-rewrite
+  known_uncertainty: none
+  expected_warnings:
+  - evidence is attached to commits no longer on the branch
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: commit_differs
+    a: '@S060.c53_c2'
+    b: '@S060.c53_n2'
+  - type: patch_id_equal
+    a: '@S060.c53_c2'
+    b: '@S060.c53_n2'
+  - type: ancestor
+    a: '@S060.c53_c1'
+    b: branch:base
+    expect: false
+  - type: ref_exists
+    ref: refs/tags/archive/S060-pre-rewrite
+  id: 60.a
+  catalog_id: 53
+- original_commits:
+  - '@S060.c54_f1'
+  - '@S060.c54_f2'
+  derived_commits:
+  - '@S060.c54_sq'
+  change_relationships:
+  - a: '@S060.c54_f1'
+    b: '@S060.c54_sq'
+    relation: combined
+  - a: '@S060.c54_f2'
+    b: '@S060.c54_sq'
+    relation: combined
+  files:
+  - plankit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: plankit/rules.py
+    function: baseline_freeze_days
+  - file: plankit/rules.py
+    function: estimate_confidence_pct
+  testing_evidence: ci PASSED on feature tip f2; squash commit sq has no record
+  deployment_evidence: none
+  metadata_availability: feature side published as tag scenario/S060/feature
+  known_uncertainty: none
+  expected_warnings:
+  - squash merge dissolves per-commit lineage
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: parents
+    commit: '@S060.c54_sq'
+    count: 1
+  - type: ancestor
+    a: '@S060.c54_f2'
+    b: '@S060.c54_sq'
+    expect: false
+  - type: diff_subset
+    small:
+    - '@S060.c54_f1'
+    - '@S060.c54_f2'
+    big: '@S060.c54_sq'
+  id: 60.b
+  catalog_id: 54
+- original_commits:
+  - '@S060.c11_t1'
+  derived_commits:
+  - '@S060.c11_b1'
+  change_relationships:
+  - a: '@S060.c11_t1'
+    b: '@S060.c11_b1'
+    relation: identical
+  files:
+  - plankit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: plankit/rules.py
+    function: max_assignments_per_person
+  testing_evidence: original t1 PASSED (synthetic, prod); backport b1 carries no record
+  deployment_evidence: none
+  metadata_availability: full
+  known_uncertainty: none
+  expected_warnings:
+  - backport carries no test evidence of its own
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: patch_id_equal
+    a: '@S060.c11_t1'
+    b: '@S060.c11_b1'
+  - type: trailer
+    commit: '@S060.c11_b1'
+    expect: valid
+    origin: '@S060.c11_t1'
+  - type: note
+    ref: ci
+    commit: '@S060.c11_b1'
+    expect: absent
+  id: 60.d
+  catalog_id: 11
+- original_commits:
+  - '@S060.c59_c1'
+  - '@S060.c59_c2'
+  derived_commits:
+  - '@S060.c59_n1'
+  - '@S060.c59_n2'
+  change_relationships:
+  - a: '@S060.c59_c1'
+    b: '@S060.c59_n1'
+    relation: identical
+  - a: '@S060.c59_c2'
+    b: '@S060.c59_n2'
+    relation: identical
+  files:
+  - plankit/rules.py
+  - tests/test_rules.py
+  - docs/changelog.md
+  regions:
+  - file: plankit/rules.py
+    function: max_daily_hours
+  - file: plankit/rules.py
+    function: overtime_multiplier_pct
+  testing_evidence: uat PASSED recorded on c2 against the old base
+  deployment_evidence: none
+  metadata_availability: full
+  known_uncertainty: none
+  expected_warnings:
+  - rebased onto a different base; evidence is for the old base
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: patch_id_equal
+    a: '@S060.c59_c2'
+    b: '@S060.c59_n2'
+  - type: ancestor
+    a: '@S060.c59_f2'
+    b: '@S060.c59_n2'
+    expect: true
+  - type: ancestor
+    a: '@S060.c59_f2'
+    b: branch:target
+    expect: false
+  id: 60.c
+  catalog_id: 59
+- original_commits:
+  - '@S060.c19_t1'
+  - '@S060.c19_t2'
+  derived_commits:
+  - '@S060.c19_sq'
+  change_relationships:
+  - a: '@S060.c19_t1'
+    b: '@S060.c19_sq'
+    relation: combined
+  - a: '@S060.c19_t2'
+    b: '@S060.c19_sq'
+    relation: combined
+  files:
+  - plankit/rules.py
+  - tests/test_rules.py
+  regions:
+  - file: plankit/rules.py
+    function: standup_minutes
+  - file: plankit/rules.py
+    function: risk_reserve_pct
+  - file: plankit/rules.py
+    function: timesheet_lock_days
+  testing_evidence: none
+  deployment_evidence: none
+  metadata_availability: squash dropped the cherry-pick trailers
+  known_uncertainty: none
+  expected_warnings:
+  - squashed backport; trailers lost
+  safe_resolution_constraints: []
+  human_review_required: false
+  assertions:
+  - type: trailer
+    commit: '@S060.c19_sq'
+    expect: missing
+  - type: diff_subset
+    small:
+    - '@S060.c19_t1'
+    - '@S060.c19_t2'
+    big: '@S060.c19_sq'
+  id: 60.e
+  catalog_id: 19
+patch_ids:
+  '@S060.o1': bee91ee392a5e28adf147d93c3c02830d9bc1403
+  '@S060.o2': 12e936e3da9d7d6e41ecd4ea7b99bcd636bdab3b
+  '@S060.c3': b16ff5956f91333b9dedf471b2d6b80b8d42f5c2
+  '@S060.n1': faf87c9b3f3984af3884caf006177d24fb31afc0
+  '@S060.n2': b16ff5956f91333b9dedf471b2d6b80b8d42f5c2
+  '@S060.c53_c1': 3f4d99e2f1fbfa8db2ca80a3bf975b2abd2499d5
+  '@S060.c53_c2': 9b6fec3858ae6d7712088708e7f1b1386faca083
+  '@S060.c53_c3': 424f0f8830ee3d30d3fc7caa7d59f8a7cdef31b5
+  '@S060.c53_n1': 535aca4561f002d49bbbf05ea88c9c6af3033e89
+  '@S060.c53_n2': 7723b7a3e2348a0360b5cc1fe51f6444334c8733
+  '@S060.c54_f1': 6b76107d4c4668e450be47ae56865bf476d6e0b3
+  '@S060.c54_f2': 0d732000e30dbca22cf8d60af6ad4e8461b3ad56
+  '@S060.c54_sq': 403234f45dc9f0b2523789243eae794e9bd153b2
+  '@S060.c11_t1': 8ca5fd52ad411d6c0cb783117e07575c835034ee
+  '@S060.c11_b1': 7654787eb1fe88c8a41cab75d98580f409601375
+  '@S060.c59_c1': fca6e6e14da6725f56c0e81606cc2e842c03491b
+  '@S060.c59_c2': 943187137c872ebbfd3ba4a8bee372a02534d2b7
+  '@S060.c59_n1': fca6e6e14da6725f56c0e81606cc2e842c03491b
+  '@S060.c59_n2': 943187137c872ebbfd3ba4a8bee372a02534d2b7
+  '@S060.c19_t1': ebd5cb4c5e6249d6a2d51e44d363f893eeb36388
+  '@S060.c19_t2': 49cb4f60840df4571470af01e13db514d0ff4195
+  '@S060.c19_sq': 075ed81700efcb4224b97dcf4ba601f8cbb9436c

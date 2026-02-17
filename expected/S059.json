@@ -1,0 +1,116 @@
+{
+  "scenario_id": "S059",
+  "repo_id": "testing-10",
+  "title": "Commits rebased onto a new base while the other side keeps tuning",
+  "difficulty": 3,
+  "primary_catalog_id": 59,
+  "catalog_ids": [
+    59
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S059/base",
+    "target": "scenario/S059/target",
+    "all_pairs": [
+      [
+        "scenario/S059/base",
+        "scenario/S059/target"
+      ]
+    ],
+    "additional_sides": {
+      "newbase": "scenario/S059/newbase"
+    }
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S059/base",
+    "scenario/S059/newbase",
+    "scenario/S059/target"
+  ],
+  "original_commits": [
+    "2428370bad8cc3ad9cbf0309195638d2c8c85dd8",
+    "6232fcfc4f5970cc0149daab85d2a34622c2195a"
+  ],
+  "derived_commits": [
+    "80486b5b0274bfa91241724bb1301325e9e7cf1b",
+    "219b12388ed63ca228fd084ed89933594665a705"
+  ],
+  "change_relationships": [
+    {
+      "a": "2428370bad8cc3ad9cbf0309195638d2c8c85dd8",
+      "b": "80486b5b0274bfa91241724bb1301325e9e7cf1b",
+      "relation": "identical"
+    },
+    {
+      "a": "6232fcfc4f5970cc0149daab85d2a34622c2195a",
+      "b": "219b12388ed63ca228fd084ed89933594665a705",
+      "relation": "identical"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py",
+    "docs/changelog.md"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "baseline_freeze_days"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "estimate_confidence_pct"
+    }
+  ],
+  "testing_evidence": "uat PASSED recorded on c2 against the old base",
+  "deployment_evidence": "none",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "rebased onto a different base; evidence is for the old base"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "patch_id_equal",
+      "a": "6232fcfc4f5970cc0149daab85d2a34622c2195a",
+      "b": "219b12388ed63ca228fd084ed89933594665a705"
+    },
+    {
+      "type": "ancestor",
+      "a": "97cbed5a98b35ccf916c92513a222b4220a74795",
+      "b": "219b12388ed63ca228fd084ed89933594665a705",
+      "expect": true
+    },
+    {
+      "type": "ancestor",
+      "a": "97cbed5a98b35ccf916c92513a222b4220a74795",
+      "b": "branch:target",
+      "expect": false
+    }
+  ],
+  "id": "59",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S059.c1": "6b76107d4c4668e450be47ae56865bf476d6e0b3",
+    "@S059.c2": "0d732000e30dbca22cf8d60af6ad4e8461b3ad56",
+    "@S059.n1": "6b76107d4c4668e450be47ae56865bf476d6e0b3",
+    "@S059.n2": "0d732000e30dbca22cf8d60af6ad4e8461b3ad56"
+  },
+  "commit_labels": {
+    "S059.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S059.c1": "2428370bad8cc3ad9cbf0309195638d2c8c85dd8",
+    "S059.c2": "6232fcfc4f5970cc0149daab85d2a34622c2195a",
+    "S059.f2": "97cbed5a98b35ccf916c92513a222b4220a74795",
+    "S059.n1": "80486b5b0274bfa91241724bb1301325e9e7cf1b",
+    "S059.n2": "219b12388ed63ca228fd084ed89933594665a705",
+    "S059.t1": "a7e558dbb023dad7add6e44c63175b3a5fb3d477"
+  }
+}

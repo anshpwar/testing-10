@@ -1,0 +1,61 @@
+scenario_id: S051
+repo_id: testing-10
+title: Second history with a hand-resolved revert
+difficulty: 2
+primary_catalog_id: 51
+catalog_ids:
+- 51
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S066/base
+  target: scenario/S066/target
+  all_pairs:
+  - - scenario/S066/base
+    - scenario/S066/target
+  additional_sides: {}
+fork_commit: '@S066.F'
+expected_conflicted_files:
+- plankit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile:
+  name: notes-not-pushed
+  drop_notes: true
+  from_mirror: true
+  effect: remote has commits but no notes refs
+sits_on:
+- S066
+branches:
+- scenario/S066/base
+- scenario/S066/target
+id: '51'
+original_commits:
+- '@S066.c1'
+derived_commits:
+- '@S066.rv'
+change_relationships:
+- a: '@S066.c1'
+  b: '@S066.rv'
+  relation: reverted
+files:
+- plankit/rules.py
+- tests/test_rules.py
+regions:
+- file: plankit/rules.py
+  function: max_daily_hours
+testing_evidence: none
+deployment_evidence: none
+metadata_availability: remote has commits but no notes refs
+known_uncertainty: evidence is reachable only as far as the clone profile allows
+expected_warnings:
+- 'clone profile notes-not-pushed: remote has commits but no notes refs'
+- revert conflicted with later edit and was resolved by hand
+safe_resolution_constraints: []
+human_review_required: true
+assertions:
+- type: profile_effect
+  profile: notes-not-pushed
+sub_entries: []
+patch_ids:
+  '@S066.c1': fca6e6e14da6725f56c0e81606cc2e842c03491b
+  '@S066.rv': null

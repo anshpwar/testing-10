@@ -1,0 +1,84 @@
+{
+  "scenario_id": "S042",
+  "repo_id": "testing-10",
+  "title": "Partial rollout reported alongside a passing test record",
+  "difficulty": 3,
+  "primary_catalog_id": 42,
+  "catalog_ids": [
+    42
+  ],
+  "expected_git_outcome": "EVIDENCE_ONLY",
+  "merge_pair": {
+    "base": "scenario/S042/base",
+    "target": "scenario/S042/target",
+    "all_pairs": [
+      [
+        "scenario/S042/base",
+        "scenario/S042/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S042/base",
+    "scenario/S042/target"
+  ],
+  "original_commits": [
+    "5af9c849e665480291249a3a2f8da01632b98b9e"
+  ],
+  "derived_commits": [
+    "74fbf4441051722dad9ebe6e8c59a148c47cb5a2"
+  ],
+  "change_relationships": [
+    {
+      "a": "5af9c849e665480291249a3a2f8da01632b98b9e",
+      "b": "74fbf4441051722dad9ebe6e8c59a148c47cb5a2",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "milestone_slip_tolerance_days"
+    }
+  ],
+  "testing_evidence": "t1 PASSED in prod",
+  "deployment_evidence": "t1 deployed to ['plansite-web'] only; remaining services pending",
+  "metadata_availability": "full",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "partial rollout; production is mixed"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "note",
+      "ref": "deploy",
+      "commit": "5af9c849e665480291249a3a2f8da01632b98b9e",
+      "expect": "present",
+      "fields": {
+        "status": "PARTIAL"
+      }
+    }
+  ],
+  "id": "42",
+  "sub_entries": [],
+  "patch_ids": {
+    "@S042.t1": "e3a334d594966a50956b2f54d23880442a0c2664",
+    "@S042.b1": "50c299386b5d523bbe6361b424397679cd5d9897"
+  },
+  "commit_labels": {
+    "S042.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S042.b1": "74fbf4441051722dad9ebe6e8c59a148c47cb5a2",
+    "S042.t1": "5af9c849e665480291249a3a2f8da01632b98b9e"
+  }
+}

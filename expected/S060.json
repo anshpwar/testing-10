@@ -1,0 +1,521 @@
+{
+  "scenario_id": "S060",
+  "repo_id": "testing-10",
+  "title": "Long history with several overlapping edits and mixed provenance",
+  "difficulty": 5,
+  "primary_catalog_id": 60,
+  "catalog_ids": [
+    60,
+    53,
+    54,
+    11,
+    59,
+    19
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S060/base",
+    "target": "scenario/S060/target",
+    "all_pairs": [
+      [
+        "scenario/S060/base",
+        "scenario/S060/target"
+      ]
+    ],
+    "additional_sides": {
+      "c54_feature": "scenario/S060/c54_feature",
+      "c59_newbase": "scenario/S060/c59_newbase",
+      "newbase": "scenario/S060/newbase",
+      "origin": "scenario/S060/origin"
+    }
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": "full",
+  "branches": [
+    "scenario/S060/base",
+    "scenario/S060/c54_feature",
+    "scenario/S060/c59_newbase",
+    "scenario/S060/newbase",
+    "scenario/S060/origin",
+    "scenario/S060/target"
+  ],
+  "original_commits": [
+    "7d79771f85343fe6c849652e09ccdf47f00b4309",
+    "98049f62ae472804d9e4e7ecf233958d81f0671d",
+    "ce1598739bb47b04a8e783872b4cd3d2ed399c77"
+  ],
+  "derived_commits": [
+    "859e792613ae172180904cfd183704ff15fbe911",
+    "934d9113a5357e32490a52eeca60a8b27a2afe3d"
+  ],
+  "change_relationships": [
+    {
+      "a": "7d79771f85343fe6c849652e09ccdf47f00b4309",
+      "b": "859e792613ae172180904cfd183704ff15fbe911",
+      "relation": "combined"
+    },
+    {
+      "a": "98049f62ae472804d9e4e7ecf233958d81f0671d",
+      "b": "859e792613ae172180904cfd183704ff15fbe911",
+      "relation": "combined"
+    },
+    {
+      "a": "ce1598739bb47b04a8e783872b4cd3d2ed399c77",
+      "b": "934d9113a5357e32490a52eeca60a8b27a2afe3d",
+      "relation": "identical"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py",
+    "docs/changelog.md"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "milestone_slip_tolerance_days"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "wip_limit"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "escalation_after_days"
+    }
+  ],
+  "testing_evidence": "prod PASSED on origin o1; none of the rewritten commits carry a record",
+  "deployment_evidence": "none",
+  "metadata_availability": "two pre-rewrite tips kept as archive tags",
+  "known_uncertainty": "none",
+  "expected_warnings": [
+    "cherry-pick, squash and rebase applied in sequence; lineage not in trailers"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": false,
+  "assertions": [
+    {
+      "type": "diff_subset",
+      "small": [
+        "7d79771f85343fe6c849652e09ccdf47f00b4309",
+        "98049f62ae472804d9e4e7ecf233958d81f0671d"
+      ],
+      "big": "859e792613ae172180904cfd183704ff15fbe911"
+    },
+    {
+      "type": "ancestor",
+      "a": "33816f3ae481b89dc88f8991c264acec8e93ddb9",
+      "b": "934d9113a5357e32490a52eeca60a8b27a2afe3d",
+      "expect": true
+    },
+    {
+      "type": "ref_exists",
+      "ref": "refs/tags/archive/S060-pre-rewrite"
+    },
+    {
+      "type": "ref_exists",
+      "ref": "refs/tags/archive/S060-pre-rewrite-2"
+    }
+  ],
+  "id": "60",
+  "sub_entries": [
+    {
+      "original_commits": [
+        "f78c02cd29de5a182e026d9f3ccb2739e12fd185",
+        "0e8dca18123a36d2c5f0214db523b318a9d62188",
+        "de987c889e3e9e0e1c7809659864330c423d52ba"
+      ],
+      "derived_commits": [
+        "256a643fb326fcb9bdc3876c23ee2a62866f83ed",
+        "e3f81f70f1edc3d7e1f70f87e3e17507717c8701"
+      ],
+      "change_relationships": [
+        {
+          "a": "f78c02cd29de5a182e026d9f3ccb2739e12fd185",
+          "b": "256a643fb326fcb9bdc3876c23ee2a62866f83ed",
+          "relation": "combined"
+        },
+        {
+          "a": "de987c889e3e9e0e1c7809659864330c423d52ba",
+          "b": "256a643fb326fcb9bdc3876c23ee2a62866f83ed",
+          "relation": "combined"
+        },
+        {
+          "a": "0e8dca18123a36d2c5f0214db523b318a9d62188",
+          "b": "e3f81f70f1edc3d7e1f70f87e3e17507717c8701",
+          "relation": "identical"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "critical_slack_days"
+        },
+        {
+          "file": "plankit/rules.py",
+          "function": "holiday_cover_pct"
+        }
+      ],
+      "testing_evidence": "ci PASSED recorded on pre-rewrite c1 only",
+      "deployment_evidence": "none",
+      "metadata_availability": "pre-rewrite tip kept as tag archive/S060-pre-rewrite",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "evidence is attached to commits no longer on the branch"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "commit_differs",
+          "a": "0e8dca18123a36d2c5f0214db523b318a9d62188",
+          "b": "e3f81f70f1edc3d7e1f70f87e3e17507717c8701"
+        },
+        {
+          "type": "patch_id_equal",
+          "a": "0e8dca18123a36d2c5f0214db523b318a9d62188",
+          "b": "e3f81f70f1edc3d7e1f70f87e3e17507717c8701"
+        },
+        {
+          "type": "ancestor",
+          "a": "f78c02cd29de5a182e026d9f3ccb2739e12fd185",
+          "b": "branch:base",
+          "expect": false
+        },
+        {
+          "type": "ref_exists",
+          "ref": "refs/tags/archive/S060-pre-rewrite"
+        }
+      ],
+      "id": "60.a",
+      "catalog_id": 53
+    },
+    {
+      "original_commits": [
+        "f5eb9919fb091ebd6f2162bc35ee3dafda83919c",
+        "cc6738c36bf40acfce08b7c8198df0669654a613"
+      ],
+      "derived_commits": [
+        "b913048d955caefcb11ee9351b41a8dc4f9a5221"
+      ],
+      "change_relationships": [
+        {
+          "a": "f5eb9919fb091ebd6f2162bc35ee3dafda83919c",
+          "b": "b913048d955caefcb11ee9351b41a8dc4f9a5221",
+          "relation": "combined"
+        },
+        {
+          "a": "cc6738c36bf40acfce08b7c8198df0669654a613",
+          "b": "b913048d955caefcb11ee9351b41a8dc4f9a5221",
+          "relation": "combined"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "baseline_freeze_days"
+        },
+        {
+          "file": "plankit/rules.py",
+          "function": "estimate_confidence_pct"
+        }
+      ],
+      "testing_evidence": "ci PASSED on feature tip f2; squash commit sq has no record",
+      "deployment_evidence": "none",
+      "metadata_availability": "feature side published as tag scenario/S060/feature",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "squash merge dissolves per-commit lineage"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "parents",
+          "commit": "b913048d955caefcb11ee9351b41a8dc4f9a5221",
+          "count": 1
+        },
+        {
+          "type": "ancestor",
+          "a": "cc6738c36bf40acfce08b7c8198df0669654a613",
+          "b": "b913048d955caefcb11ee9351b41a8dc4f9a5221",
+          "expect": false
+        },
+        {
+          "type": "diff_subset",
+          "small": [
+            "f5eb9919fb091ebd6f2162bc35ee3dafda83919c",
+            "cc6738c36bf40acfce08b7c8198df0669654a613"
+          ],
+          "big": "b913048d955caefcb11ee9351b41a8dc4f9a5221"
+        }
+      ],
+      "id": "60.b",
+      "catalog_id": 54
+    },
+    {
+      "original_commits": [
+        "73038ba0e31ec5935f6ec33e607ec90663c401ab"
+      ],
+      "derived_commits": [
+        "47e89ddf2434c522ead91dc740abe27fb1d896ce"
+      ],
+      "change_relationships": [
+        {
+          "a": "73038ba0e31ec5935f6ec33e607ec90663c401ab",
+          "b": "47e89ddf2434c522ead91dc740abe27fb1d896ce",
+          "relation": "identical"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "max_assignments_per_person"
+        }
+      ],
+      "testing_evidence": "original t1 PASSED (synthetic, prod); backport b1 carries no record",
+      "deployment_evidence": "none",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "backport carries no test evidence of its own"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "patch_id_equal",
+          "a": "73038ba0e31ec5935f6ec33e607ec90663c401ab",
+          "b": "47e89ddf2434c522ead91dc740abe27fb1d896ce"
+        },
+        {
+          "type": "trailer",
+          "commit": "47e89ddf2434c522ead91dc740abe27fb1d896ce",
+          "expect": "valid",
+          "origin": "73038ba0e31ec5935f6ec33e607ec90663c401ab"
+        },
+        {
+          "type": "note",
+          "ref": "ci",
+          "commit": "47e89ddf2434c522ead91dc740abe27fb1d896ce",
+          "expect": "absent"
+        }
+      ],
+      "id": "60.d",
+      "catalog_id": 11
+    },
+    {
+      "original_commits": [
+        "bf6e6d9fc1bd945cca6183f656a77dd86e103250",
+        "1990c100bd844791fddda78727ca1b0cd40d9e1d"
+      ],
+      "derived_commits": [
+        "6b425fe70a3e95539a8881e5a700a96018eb366f",
+        "ab4cba62ae0d04192df4280e75b403699a624de4"
+      ],
+      "change_relationships": [
+        {
+          "a": "bf6e6d9fc1bd945cca6183f656a77dd86e103250",
+          "b": "6b425fe70a3e95539a8881e5a700a96018eb366f",
+          "relation": "identical"
+        },
+        {
+          "a": "1990c100bd844791fddda78727ca1b0cd40d9e1d",
+          "b": "ab4cba62ae0d04192df4280e75b403699a624de4",
+          "relation": "identical"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py",
+        "docs/changelog.md"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "max_daily_hours"
+        },
+        {
+          "file": "plankit/rules.py",
+          "function": "overtime_multiplier_pct"
+        }
+      ],
+      "testing_evidence": "uat PASSED recorded on c2 against the old base",
+      "deployment_evidence": "none",
+      "metadata_availability": "full",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "rebased onto a different base; evidence is for the old base"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "patch_id_equal",
+          "a": "1990c100bd844791fddda78727ca1b0cd40d9e1d",
+          "b": "ab4cba62ae0d04192df4280e75b403699a624de4"
+        },
+        {
+          "type": "ancestor",
+          "a": "b3f05d95cb478e54bd7cf9ef9622e951160aa36e",
+          "b": "ab4cba62ae0d04192df4280e75b403699a624de4",
+          "expect": true
+        },
+        {
+          "type": "ancestor",
+          "a": "b3f05d95cb478e54bd7cf9ef9622e951160aa36e",
+          "b": "branch:target",
+          "expect": false
+        }
+      ],
+      "id": "60.c",
+      "catalog_id": 59
+    },
+    {
+      "original_commits": [
+        "65daba4d826793290c6714a3974cea390847ba62",
+        "ca12e37533c3465e5605f073933b980cd1aa6121"
+      ],
+      "derived_commits": [
+        "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6"
+      ],
+      "change_relationships": [
+        {
+          "a": "65daba4d826793290c6714a3974cea390847ba62",
+          "b": "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6",
+          "relation": "combined"
+        },
+        {
+          "a": "ca12e37533c3465e5605f073933b980cd1aa6121",
+          "b": "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6",
+          "relation": "combined"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "standup_minutes"
+        },
+        {
+          "file": "plankit/rules.py",
+          "function": "risk_reserve_pct"
+        },
+        {
+          "file": "plankit/rules.py",
+          "function": "timesheet_lock_days"
+        }
+      ],
+      "testing_evidence": "none",
+      "deployment_evidence": "none",
+      "metadata_availability": "squash dropped the cherry-pick trailers",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "squashed backport; trailers lost"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "trailer",
+          "commit": "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6",
+          "expect": "missing"
+        },
+        {
+          "type": "diff_subset",
+          "small": [
+            "65daba4d826793290c6714a3974cea390847ba62",
+            "ca12e37533c3465e5605f073933b980cd1aa6121"
+          ],
+          "big": "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6"
+        }
+      ],
+      "id": "60.e",
+      "catalog_id": 19
+    }
+  ],
+  "patch_ids": {
+    "@S060.o1": "bee91ee392a5e28adf147d93c3c02830d9bc1403",
+    "@S060.o2": "12e936e3da9d7d6e41ecd4ea7b99bcd636bdab3b",
+    "@S060.c3": "b16ff5956f91333b9dedf471b2d6b80b8d42f5c2",
+    "@S060.n1": "faf87c9b3f3984af3884caf006177d24fb31afc0",
+    "@S060.n2": "b16ff5956f91333b9dedf471b2d6b80b8d42f5c2",
+    "@S060.c53_c1": "3f4d99e2f1fbfa8db2ca80a3bf975b2abd2499d5",
+    "@S060.c53_c2": "9b6fec3858ae6d7712088708e7f1b1386faca083",
+    "@S060.c53_c3": "424f0f8830ee3d30d3fc7caa7d59f8a7cdef31b5",
+    "@S060.c53_n1": "535aca4561f002d49bbbf05ea88c9c6af3033e89",
+    "@S060.c53_n2": "7723b7a3e2348a0360b5cc1fe51f6444334c8733",
+    "@S060.c54_f1": "6b76107d4c4668e450be47ae56865bf476d6e0b3",
+    "@S060.c54_f2": "0d732000e30dbca22cf8d60af6ad4e8461b3ad56",
+    "@S060.c54_sq": "403234f45dc9f0b2523789243eae794e9bd153b2",
+    "@S060.c11_t1": "8ca5fd52ad411d6c0cb783117e07575c835034ee",
+    "@S060.c11_b1": "7654787eb1fe88c8a41cab75d98580f409601375",
+    "@S060.c59_c1": "fca6e6e14da6725f56c0e81606cc2e842c03491b",
+    "@S060.c59_c2": "943187137c872ebbfd3ba4a8bee372a02534d2b7",
+    "@S060.c59_n1": "fca6e6e14da6725f56c0e81606cc2e842c03491b",
+    "@S060.c59_n2": "943187137c872ebbfd3ba4a8bee372a02534d2b7",
+    "@S060.c19_t1": "ebd5cb4c5e6249d6a2d51e44d363f893eeb36388",
+    "@S060.c19_t2": "49cb4f60840df4571470af01e13db514d0ff4195",
+    "@S060.c19_sq": "075ed81700efcb4224b97dcf4ba601f8cbb9436c"
+  },
+  "commit_labels": {
+    "S060.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S060.c1": "9d32ed0d6a14ee6b4f5f0aa014d1719ab50ebd5d",
+    "S060.c11_b1": "47e89ddf2434c522ead91dc740abe27fb1d896ce",
+    "S060.c11_b2": "e9fa24cf073738b32d656eacf53d828b530d6d01",
+    "S060.c11_t1": "73038ba0e31ec5935f6ec33e607ec90663c401ab",
+    "S060.c11_t2": "dcf7363df9dd98e87024b58c9dcc6971c04127b1",
+    "S060.c19_b1": "0268866e791b8facad825e40165b6bc4736759e0",
+    "S060.c19_b2": "faffe4468f471cc61e31206857c821a308945149",
+    "S060.c19_b3": "9bdffa9b45bc302b4333f6f9c72a35fb599819b5",
+    "S060.c19_sq": "b52f5ec2d5d84164a6d7c68b7fe1d5e92a26d5a6",
+    "S060.c19_t1": "65daba4d826793290c6714a3974cea390847ba62",
+    "S060.c19_t2": "ca12e37533c3465e5605f073933b980cd1aa6121",
+    "S060.c19_t3": "1d92514662ff4d9a9fea86fdaa54fd4a2a70be6e",
+    "S060.c2": "954b35443af3db5b5eb069121d9781f261d52076",
+    "S060.c3": "ce1598739bb47b04a8e783872b4cd3d2ed399c77",
+    "S060.c53_c1": "f78c02cd29de5a182e026d9f3ccb2739e12fd185",
+    "S060.c53_c2": "0e8dca18123a36d2c5f0214db523b318a9d62188",
+    "S060.c53_c3": "de987c889e3e9e0e1c7809659864330c423d52ba",
+    "S060.c53_n1": "256a643fb326fcb9bdc3876c23ee2a62866f83ed",
+    "S060.c53_n2": "e3f81f70f1edc3d7e1f70f87e3e17507717c8701",
+    "S060.c53_t1": "3c6fea611d1c93a08981efadcc40861465d958ef",
+    "S060.c54_f1": "f5eb9919fb091ebd6f2162bc35ee3dafda83919c",
+    "S060.c54_f2": "cc6738c36bf40acfce08b7c8198df0669654a613",
+    "S060.c54_sq": "b913048d955caefcb11ee9351b41a8dc4f9a5221",
+    "S060.c54_t1": "7f9f9d9dfc07e4e4c81531917806b81520d36b15",
+    "S060.c59_c1": "bf6e6d9fc1bd945cca6183f656a77dd86e103250",
+    "S060.c59_c2": "1990c100bd844791fddda78727ca1b0cd40d9e1d",
+    "S060.c59_f2": "b3f05d95cb478e54bd7cf9ef9622e951160aa36e",
+    "S060.c59_n1": "6b425fe70a3e95539a8881e5a700a96018eb366f",
+    "S060.c59_n2": "ab4cba62ae0d04192df4280e75b403699a624de4",
+    "S060.c59_t1": "f4be032f312a8a6a8a082f6bbd1335a6f4f86548",
+    "S060.f2": "33816f3ae481b89dc88f8991c264acec8e93ddb9",
+    "S060.n1": "859e792613ae172180904cfd183704ff15fbe911",
+    "S060.n2": "934d9113a5357e32490a52eeca60a8b27a2afe3d",
+    "S060.o1": "7d79771f85343fe6c849652e09ccdf47f00b4309",
+    "S060.o2": "98049f62ae472804d9e4e7ecf233958d81f0671d",
+    "S060.sq": "9efdde2c6320ebb272d1502908f0da4d9032819a",
+    "S060.t1": "24952c1a1f3d5262aefb3b9e38f9f8a6cf5293f6"
+  }
+}

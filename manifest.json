@@ -1,0 +1,55 @@
+{
+  "pins": {
+    "c_compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)",
+    "django": "6.1.2",
+    "git": "git version 2.53.0",
+    "make": "GNU Make 3.81",
+    "node": "v26.3.0",
+    "pytest": "pytest 9.2.0",
+    "python": "3.14.5"
+  },
+  "repo": "testing-10",
+  "services": [
+    "plansite-web",
+    "plansite-scheduler"
+  ],
+  "stack": "Django (projects, milestones, assignments, timesheets) plus a Python scheduler and a C working-day and dependency-bitset helper called through ctypes",
+  "start_date": "2025-01-13T09:50:00",
+  "suites": [
+    {
+      "argv": [
+        "make",
+        "-s",
+        "test-c"
+      ],
+      "name": "c"
+    },
+    {
+      "argv": [
+        "{py}",
+        "manage.py",
+        "test",
+        "tests",
+        "--settings=plansite.settings.test",
+        "-p",
+        "test_[!z]*.py",
+        "--noinput"
+      ],
+      "name": "unit"
+    },
+    {
+      "argv": [
+        "{py}",
+        "manage.py",
+        "test",
+        "tests",
+        "--settings=plansite.settings.test",
+        "-p",
+        "test_zz*.py",
+        "--noinput"
+      ],
+      "name": "integration"
+    }
+  ],
+  "title": "Plansite"
+}

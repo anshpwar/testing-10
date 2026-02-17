@@ -1,0 +1,386 @@
+{
+  "scenario_id": "S052",
+  "repo_id": "testing-10",
+  "title": "Composite history across several policy and helper changes",
+  "difficulty": 5,
+  "primary_catalog_id": 52,
+  "catalog_ids": [
+    52,
+    84,
+    86,
+    88,
+    85,
+    51
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S052/base",
+    "target": "scenario/S052/target",
+    "all_pairs": [
+      [
+        "scenario/S052/base",
+        "scenario/S052/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": {
+    "name": "foreign-notes",
+    "graft_from": "testing-9",
+    "effect": "notes from an unrelated repository are present"
+  },
+  "branches": [
+    "scenario/S052/base",
+    "scenario/S052/target"
+  ],
+  "original_commits": [
+    "175f511318805502667946438dd844923186960c",
+    "c24b47988cc95e3254e147c38fddcc1b76919ccf",
+    "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1",
+    "f01b724b07c60e2cd60f73d696157fd462f6ed3d"
+  ],
+  "derived_commits": [
+    "32f79d59ea3bb78abe53507224535ce455597430",
+    "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+    "b793224b58176027fb29767bd3dc037014a52a42",
+    "c0f80f0bae8f3b638a3713a9b5d6d25f80057621",
+    "6944f376bf904e1729140eee4c87745c2cdec9fd"
+  ],
+  "change_relationships": [
+    {
+      "a": "175f511318805502667946438dd844923186960c",
+      "b": "32f79d59ea3bb78abe53507224535ce455597430",
+      "relation": "identical"
+    },
+    {
+      "a": "c24b47988cc95e3254e147c38fddcc1b76919ccf",
+      "b": "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+      "relation": "unrelated"
+    },
+    {
+      "a": "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1",
+      "b": "c0f80f0bae8f3b638a3713a9b5d6d25f80057621",
+      "relation": "unrelated"
+    },
+    {
+      "a": "f01b724b07c60e2cd60f73d696157fd462f6ed3d",
+      "b": "6944f376bf904e1729140eee4c87745c2cdec9fd",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "estimate_confidence_pct"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "overtime_multiplier_pct"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "wip_limit"
+    },
+    {
+      "file": "plankit/rules.py",
+      "function": "escalation_after_days"
+    }
+  ],
+  "testing_evidence": "run_id run-r10-0042 reused on three unrelated commits with conflicting statuses",
+  "deployment_evidence": "none",
+  "metadata_availability": "notes from an unrelated repository are present",
+  "known_uncertainty": "evidence reachable only if the profile allows it",
+  "expected_warnings": [
+    "clone profile foreign-notes: notes from an unrelated repository are present"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": true,
+  "assertions": [
+    {
+      "type": "profile_effect",
+      "profile": "foreign-notes"
+    }
+  ],
+  "profile_note": "ordinary composite history; the clone profile is applied by the runner",
+  "id": "52",
+  "sub_entries": [
+    {
+      "original_commits": [
+        "175f511318805502667946438dd844923186960c"
+      ],
+      "derived_commits": [
+        "32f79d59ea3bb78abe53507224535ce455597430"
+      ],
+      "change_relationships": [
+        {
+          "a": "175f511318805502667946438dd844923186960c",
+          "b": "32f79d59ea3bb78abe53507224535ce455597430",
+          "relation": "identical"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "estimate_confidence_pct"
+        }
+      ],
+      "testing_evidence": "none",
+      "deployment_evidence": "none",
+      "metadata_availability": "message trailer names a nonexistent commit; provenance note names an unrelated commit",
+      "known_uncertainty": "true origin recoverable only by patch-id",
+      "expected_warnings": [
+        "no provenance reference resolves to the true origin"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": true,
+      "assertions": [
+        {
+          "type": "patch_id_equal",
+          "a": "175f511318805502667946438dd844923186960c",
+          "b": "32f79d59ea3bb78abe53507224535ce455597430"
+        },
+        {
+          "type": "trailer",
+          "commit": "32f79d59ea3bb78abe53507224535ce455597430",
+          "expect": "invalid",
+          "origin": "175f511318805502667946438dd844923186960c"
+        },
+        {
+          "type": "note",
+          "ref": "provenance",
+          "commit": "32f79d59ea3bb78abe53507224535ce455597430",
+          "expect": "present"
+        }
+      ],
+      "id": "52.a",
+      "catalog_id": 84
+    },
+    {
+      "original_commits": [
+        "c24b47988cc95e3254e147c38fddcc1b76919ccf"
+      ],
+      "derived_commits": [
+        "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+        "b793224b58176027fb29767bd3dc037014a52a42"
+      ],
+      "change_relationships": [
+        {
+          "a": "c24b47988cc95e3254e147c38fddcc1b76919ccf",
+          "b": "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "overtime_multiplier_pct"
+        }
+      ],
+      "testing_evidence": "run_id run-r10-0042 reused on three unrelated commits with conflicting statuses",
+      "deployment_evidence": "none",
+      "metadata_availability": "duplicate evidence identifiers",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "run_id is not unique; none of the records can be trusted"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": true,
+      "assertions": [
+        {
+          "type": "note_field_equal_across",
+          "ref": "ci",
+          "commits": [
+            "c24b47988cc95e3254e147c38fddcc1b76919ccf",
+            "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+            "b793224b58176027fb29767bd3dc037014a52a42"
+          ],
+          "field": "run_id"
+        }
+      ],
+      "id": "52.b",
+      "catalog_id": 86
+    },
+    {
+      "original_commits": [
+        "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1"
+      ],
+      "derived_commits": [
+        "c0f80f0bae8f3b638a3713a9b5d6d25f80057621"
+      ],
+      "change_relationships": [
+        {
+          "a": "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1",
+          "b": "c0f80f0bae8f3b638a3713a9b5d6d25f80057621",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "wip_limit"
+        }
+      ],
+      "testing_evidence": "t1 PASSED from an unsigned anonymous upload; b1 PASSED from the trusted runner",
+      "deployment_evidence": "none",
+      "metadata_availability": "t1 evidence source unverified",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "unverified evidence must not outweigh trusted evidence"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": true,
+      "assertions": [
+        {
+          "type": "note",
+          "ref": "ci",
+          "commit": "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1",
+          "expect": "present",
+          "fields": {
+            "source": "anonymous-upload",
+            "signature": null
+          }
+        },
+        {
+          "type": "note",
+          "ref": "ci",
+          "commit": "c0f80f0bae8f3b638a3713a9b5d6d25f80057621",
+          "expect": "present",
+          "fields": {
+            "source": "fixture-ci"
+          }
+        }
+      ],
+      "id": "52.c",
+      "catalog_id": 88
+    },
+    {
+      "original_commits": [
+        "f01b724b07c60e2cd60f73d696157fd462f6ed3d"
+      ],
+      "derived_commits": [
+        "6944f376bf904e1729140eee4c87745c2cdec9fd"
+      ],
+      "change_relationships": [
+        {
+          "a": "f01b724b07c60e2cd60f73d696157fd462f6ed3d",
+          "b": "6944f376bf904e1729140eee4c87745c2cdec9fd",
+          "relation": "unrelated"
+        }
+      ],
+      "files": [
+        "plankit/rules.py",
+        "tests/test_rules.py"
+      ],
+      "regions": [
+        {
+          "file": "plankit/rules.py",
+          "function": "escalation_after_days"
+        }
+      ],
+      "testing_evidence": "unparseable",
+      "deployment_evidence": "none",
+      "metadata_availability": "t1 note is truncated JSON; t2 note parses but every field has the wrong type",
+      "known_uncertainty": "none",
+      "expected_warnings": [
+        "malformed evidence must be reported as UNKNOWN, never PASSED"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "note_malformed",
+          "ref": "ci",
+          "commit": "f01b724b07c60e2cd60f73d696157fd462f6ed3d"
+        },
+        {
+          "type": "note_wrong_types",
+          "ref": "ci",
+          "commit": "6944f376bf904e1729140eee4c87745c2cdec9fd"
+        }
+      ],
+      "id": "52.d",
+      "catalog_id": 85
+    },
+    {
+      "original_commits": [],
+      "derived_commits": [],
+      "change_relationships": [],
+      "files": [],
+      "regions": [],
+      "testing_evidence": "none",
+      "deployment_evidence": "none",
+      "metadata_availability": "remote has commits but no notes refs",
+      "known_uncertainty": "evidence reachable only if the profile allows it",
+      "expected_warnings": [
+        "clone profile notes-not-pushed: remote has commits but no notes refs"
+      ],
+      "safe_resolution_constraints": [],
+      "human_review_required": false,
+      "assertions": [
+        {
+          "type": "profile_effect",
+          "profile": "notes-not-pushed"
+        }
+      ],
+      "id": "52.e",
+      "catalog_id": 51,
+      "clone_profile": {
+        "name": "notes-not-pushed",
+        "drop_notes": true,
+        "from_mirror": true,
+        "effect": "remote has commits but no notes refs"
+      },
+      "underlying": []
+    }
+  ],
+  "patch_ids": {
+    "@S052.c84_t1": "d1cc23ab2c905d760d5ef25652f2f6e5b1fbcf7c",
+    "@S052.c84_b1": "d1cc23ab2c905d760d5ef25652f2f6e5b1fbcf7c",
+    "@S052.c86_t1": "64df85c7913a0c108486db7cd468fbf9d4e785fe",
+    "@S052.c86_b1": "50c299386b5d523bbe6361b424397679cd5d9897",
+    "@S052.c86_t2": "987d8de1b8a7176d0b726fd83d0b748fdfe70326",
+    "@S052.c88_t1": "3d060761a2fb151f1c56c04aff194b33b066897c",
+    "@S052.c88_b1": "1f67cdb4b5ae90b5668380adc84d8741f8eb5171",
+    "@S052.c85_t1": "91231f18ea0bf1b4a85595db4632bc5c8fba03a0",
+    "@S052.c85_t2": "bebb8529d00e6a94f883721647fcb047ad316b83"
+  },
+  "commit_labels": {
+    "S052.F": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+    "S052.c84_b0": "2b81656cf091c3ab020e771f5a1e823dc758b6e3",
+    "S052.c84_b1": "32f79d59ea3bb78abe53507224535ce455597430",
+    "S052.c84_b2": "090c72bb09f70ddd34620f2c2e81d6a363aaec56",
+    "S052.c84_t1": "175f511318805502667946438dd844923186960c",
+    "S052.c84_t2": "707bfb343d8840207d8d68bab8ab18928cc676fc",
+    "S052.c84_u1": "005da0280b341bf7656e9a878e1c098b700916bd",
+    "S052.c85_b1": "a6e76e5f0d35720a8c5fe45ca12ded0ed9c06d7d",
+    "S052.c85_t1": "f01b724b07c60e2cd60f73d696157fd462f6ed3d",
+    "S052.c85_t2": "6944f376bf904e1729140eee4c87745c2cdec9fd",
+    "S052.c86_b1": "9bd6c500ba6638633dac6f7a91455e150dd1312d",
+    "S052.c86_t1": "c24b47988cc95e3254e147c38fddcc1b76919ccf",
+    "S052.c86_t2": "b793224b58176027fb29767bd3dc037014a52a42",
+    "S052.c88_b1": "c0f80f0bae8f3b638a3713a9b5d6d25f80057621",
+    "S052.c88_t1": "2c23ed8fe2f8052217394f23fb0a3a88960bd1c1"
+  }
+}

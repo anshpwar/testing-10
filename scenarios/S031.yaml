@@ -1,0 +1,59 @@
+scenario_id: S031
+repo_id: testing-10
+title: Test record without execution times beside a concurrent edit
+difficulty: 2
+primary_catalog_id: 31
+catalog_ids:
+- 31
+expected_git_outcome: CONFLICT
+merge_pair:
+  base: scenario/S031/base
+  target: scenario/S031/target
+  all_pairs:
+  - - scenario/S031/base
+    - scenario/S031/target
+  additional_sides: {}
+fork_commit: '@S031.F'
+expected_conflicted_files:
+- plankit/rules.py
+- tests/test_rules.py
+validation_method: merge
+clone_profile: full
+branches:
+- scenario/S031/base
+- scenario/S031/target
+original_commits:
+- '@S031.t1'
+derived_commits:
+- '@S031.b1'
+change_relationships:
+- a: '@S031.t1'
+  b: '@S031.b1'
+  relation: unrelated
+files:
+- plankit/rules.py
+- tests/test_rules.py
+regions:
+- file: plankit/rules.py
+  function: wip_limit
+testing_evidence: t1 PASSED but started_at/finished_at are null
+deployment_evidence: none
+metadata_availability: timestamps missing
+known_uncertainty: none
+expected_warnings:
+- execution time cannot be established; freshness unknown
+safe_resolution_constraints: []
+human_review_required: false
+assertions:
+- type: note
+  ref: ci
+  commit: '@S031.t1'
+  expect: present
+  fields:
+    started_at: null
+    finished_at: null
+id: '31'
+sub_entries: []
+patch_ids:
+  '@S031.t1': 3d060761a2fb151f1c56c04aff194b33b066897c
+  '@S031.b1': 1f67cdb4b5ae90b5668380adc84d8741f8eb5171

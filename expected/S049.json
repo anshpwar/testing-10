@@ -1,0 +1,86 @@
+{
+  "scenario_id": "S049",
+  "repo_id": "testing-10",
+  "title": "Second history with timestamp-less test records",
+  "difficulty": 2,
+  "primary_catalog_id": 49,
+  "catalog_ids": [
+    49
+  ],
+  "expected_git_outcome": "CONFLICT",
+  "merge_pair": {
+    "base": "scenario/S031/base",
+    "target": "scenario/S031/target",
+    "all_pairs": [
+      [
+        "scenario/S031/base",
+        "scenario/S031/target"
+      ]
+    ],
+    "additional_sides": {}
+  },
+  "fork_commit": "8bc3cd0371465a06c630c92d18fcb938626bcdcd",
+  "expected_conflicted_files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "validation_method": "merge",
+  "clone_profile": {
+    "name": "partial-blobless",
+    "filter": "blob:none",
+    "effect": "clone is a partial clone without blobs"
+  },
+  "sits_on": [
+    "S031"
+  ],
+  "branches": [
+    "scenario/S031/base",
+    "scenario/S031/target"
+  ],
+  "id": "49",
+  "original_commits": [
+    "98a3f154228f517b0ae60e11ff0ae9d7e598bfce"
+  ],
+  "derived_commits": [
+    "8895a1080eb430af6674adaa42fc4a1ce60a673c"
+  ],
+  "change_relationships": [
+    {
+      "a": "98a3f154228f517b0ae60e11ff0ae9d7e598bfce",
+      "b": "8895a1080eb430af6674adaa42fc4a1ce60a673c",
+      "relation": "unrelated"
+    }
+  ],
+  "files": [
+    "plankit/rules.py",
+    "tests/test_rules.py"
+  ],
+  "regions": [
+    {
+      "file": "plankit/rules.py",
+      "function": "wip_limit"
+    }
+  ],
+  "testing_evidence": "t1 PASSED but started_at/finished_at are null",
+  "deployment_evidence": "none",
+  "metadata_availability": "clone is a partial clone without blobs",
+  "known_uncertainty": "evidence is reachable only as far as the clone profile allows",
+  "expected_warnings": [
+    "clone profile partial-blobless: clone is a partial clone without blobs",
+    "execution time cannot be established; freshness unknown"
+  ],
+  "safe_resolution_constraints": [],
+  "human_review_required": true,
+  "assertions": [
+    {
+      "type": "profile_effect",
+      "profile": "partial-blobless"
+    }
+  ],
+  "sub_entries": [],
+  "patch_ids": {
+    "@S031.t1": "3d060761a2fb151f1c56c04aff194b33b066897c",
+    "@S031.b1": "1f67cdb4b5ae90b5668380adc84d8741f8eb5171"
+  },
+  "commit_labels": {}
+}

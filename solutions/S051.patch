@@ -1,0 +1,36 @@
+diff --git a/plankit/rules.py b/plankit/rules.py
+index 9f352ed..79b9723 100644
+--- a/plankit/rules.py
++++ b/plankit/rules.py
+@@ -24,13 +24,13 @@ def review_turnaround_hours(change_lines):
+ 
+ def max_daily_hours(seniority):
+     """Most hours one person may log in a day, by seniority level."""
+-    if seniority <= 1:
+-        return 5
+     if seniority <= 2:
+         return 6
+     if seniority <= 3:
+         return 7
+-    return 8
++    if seniority <= 4:
++        return 8
++    return 9
+ 
+ 
+ def overtime_multiplier_pct(weekly_hours):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index 767c8ce..607fe34 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -25,8 +25,8 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.review_turnaround_hours(1001), 48)
+ 
+     def test_max_daily_hours(self):
+-        self.assertEqual(rules.max_daily_hours(0), 5)
+-        self.assertEqual(rules.max_daily_hours(1), 5)
++        self.assertEqual(rules.max_daily_hours(0), 6)
++        self.assertEqual(rules.max_daily_hours(1), 6)
+         self.assertEqual(rules.max_daily_hours(2), 6)
+         self.assertEqual(rules.max_daily_hours(3), 7)
+         self.assertEqual(rules.max_daily_hours(4), 8)

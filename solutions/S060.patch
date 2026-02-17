@@ -1,0 +1,264 @@
+diff --git a/plankit/rules.py b/plankit/rules.py
+index 860df1c..36c0728 100644
+--- a/plankit/rules.py
++++ b/plankit/rules.py
+@@ -24,11 +24,11 @@ def review_turnaround_hours(change_lines):
+ 
+ def max_daily_hours(seniority):
+     """Most hours one person may log in a day, by seniority level."""
+-    if seniority <= 1:
+-        return 6
+     if seniority <= 2:
+-        return 7
++        return 6
+     if seniority <= 3:
++        return 7
++    if seniority <= 4:
+         return 8
+     return 9
+ 
+@@ -46,46 +46,46 @@ def overtime_multiplier_pct(weekly_hours):
+ 
+ def milestone_slip_tolerance_days(duration_days):
+     """Working days a milestone forecast may trail its due date and still count as at risk, by milestone length in working days."""
+-    if duration_days <= 14:
+-        return 2
+-    if duration_days <= 60:
+-        return 4
+-    if duration_days <= 180:
+-        return 8
+-    return 15
++    if duration_days <= 15:
++        return 1
++    if duration_days <= 66:
++        return 3
++    if duration_days <= 198:
++        return 7
++    return 14
+ 
+ 
+ def wip_limit(team_size):
+     """Items that may be in progress at once, by team size."""
+     if team_size <= 3:
+-        return 3
++        return 2
+     if team_size <= 6:
+-        return 5
++        return 4
+     if team_size <= 12:
+-        return 8
+-    return 11
++        return 7
++    return 10
+ 
+ 
+ def escalation_after_days(priority):
+     """Working days an open assignment may wait before it is escalated, by priority rank (1 is most urgent)."""
+     if priority <= 1:
+-        return 2
++        return 1
+     if priority <= 2:
+-        return 4
++        return 3
+     if priority <= 3:
+-        return 6
+-    return 11
++        return 5
++    return 10
+ 
+ 
+ def max_assignments_per_person(seniority):
+     """Open assignments one person may hold, by seniority level."""
+-    if seniority <= 1:
+-        return 2
+     if seniority <= 2:
+         return 3
+     if seniority <= 3:
+         return 4
+-    return 5
++    if seniority <= 4:
++        return 5
++    return 6
+ 
+ 
+ def standup_minutes(team_size):
+@@ -112,13 +112,13 @@ def risk_reserve_pct(dependency_count):
+ 
+ def timesheet_lock_days(team_size):
+     """Working days after which a time entry is locked, by team size."""
+-    if team_size <= 5:
+-        return 6
+-    if team_size <= 15:
+-        return 4
+-    if team_size <= 50:
+-        return 2
+-    return 1
++    if team_size <= 6:
++        return 7
++    if team_size <= 16:
++        return 5
++    if team_size <= 55:
++        return 3
++    return 2
+ 
+ 
+ def sprint_length_days(team_size):
+@@ -134,11 +134,11 @@ def sprint_length_days(team_size):
+ 
+ def critical_slack_days(project_days):
+     """Slack in working days under which a task counts as near-critical, by project length in working days."""
+-    if project_days <= 30:
++    if project_days <= 33:
+         return 0
+-    if project_days <= 90:
++    if project_days <= 99:
+         return 2
+-    if project_days <= 180:
++    if project_days <= 198:
+         return 5
+     return 10
+ 
+@@ -156,11 +156,11 @@ def holiday_cover_pct(team_size):
+ 
+ def baseline_freeze_days(duration_days):
+     """Working days before the due date during which a milestone baseline is frozen, by milestone length in working days."""
+-    if duration_days <= 30:
++    if duration_days <= 33:
+         return 3
+-    if duration_days <= 90:
++    if duration_days <= 99:
+         return 7
+-    if duration_days <= 180:
++    if duration_days <= 198:
+         return 14
+     return 28
+ 
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index c37b475..47e90a1 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -27,9 +27,9 @@ class RuleTests(unittest.TestCase):
+     def test_max_daily_hours(self):
+         self.assertEqual(rules.max_daily_hours(0), 6)
+         self.assertEqual(rules.max_daily_hours(1), 6)
+-        self.assertEqual(rules.max_daily_hours(2), 7)
+-        self.assertEqual(rules.max_daily_hours(3), 8)
+-        self.assertEqual(rules.max_daily_hours(4), 9)
++        self.assertEqual(rules.max_daily_hours(2), 6)
++        self.assertEqual(rules.max_daily_hours(3), 7)
++        self.assertEqual(rules.max_daily_hours(4), 8)
+ 
+     def test_overtime_multiplier_pct(self):
+         self.assertEqual(rules.overtime_multiplier_pct(0), 100)
+@@ -42,35 +42,35 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.overtime_multiplier_pct(61), 200)
+ 
+     def test_milestone_slip_tolerance_days(self):
+-        self.assertEqual(rules.milestone_slip_tolerance_days(0), 2)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(1), 2)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(14), 2)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(15), 4)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(60), 4)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(61), 8)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(180), 8)
+-        self.assertEqual(rules.milestone_slip_tolerance_days(181), 15)
++        self.assertEqual(rules.milestone_slip_tolerance_days(0), 1)
++        self.assertEqual(rules.milestone_slip_tolerance_days(1), 1)
++        self.assertEqual(rules.milestone_slip_tolerance_days(14), 1)
++        self.assertEqual(rules.milestone_slip_tolerance_days(15), 1)
++        self.assertEqual(rules.milestone_slip_tolerance_days(60), 3)
++        self.assertEqual(rules.milestone_slip_tolerance_days(61), 3)
++        self.assertEqual(rules.milestone_slip_tolerance_days(180), 7)
++        self.assertEqual(rules.milestone_slip_tolerance_days(181), 7)
+ 
+     def test_wip_limit(self):
+-        self.assertEqual(rules.wip_limit(0), 3)
+-        self.assertEqual(rules.wip_limit(1), 3)
+-        self.assertEqual(rules.wip_limit(3), 3)
+-        self.assertEqual(rules.wip_limit(4), 5)
+-        self.assertEqual(rules.wip_limit(6), 5)
+-        self.assertEqual(rules.wip_limit(7), 8)
+-        self.assertEqual(rules.wip_limit(12), 8)
+-        self.assertEqual(rules.wip_limit(13), 11)
++        self.assertEqual(rules.wip_limit(0), 2)
++        self.assertEqual(rules.wip_limit(1), 2)
++        self.assertEqual(rules.wip_limit(3), 2)
++        self.assertEqual(rules.wip_limit(4), 4)
++        self.assertEqual(rules.wip_limit(6), 4)
++        self.assertEqual(rules.wip_limit(7), 7)
++        self.assertEqual(rules.wip_limit(12), 7)
++        self.assertEqual(rules.wip_limit(13), 10)
+ 
+     def test_escalation_after_days(self):
+-        self.assertEqual(rules.escalation_after_days(0), 2)
+-        self.assertEqual(rules.escalation_after_days(1), 2)
+-        self.assertEqual(rules.escalation_after_days(2), 4)
+-        self.assertEqual(rules.escalation_after_days(3), 6)
+-        self.assertEqual(rules.escalation_after_days(4), 11)
++        self.assertEqual(rules.escalation_after_days(0), 1)
++        self.assertEqual(rules.escalation_after_days(1), 1)
++        self.assertEqual(rules.escalation_after_days(2), 3)
++        self.assertEqual(rules.escalation_after_days(3), 5)
++        self.assertEqual(rules.escalation_after_days(4), 10)
+ 
+     def test_max_assignments_per_person(self):
+-        self.assertEqual(rules.max_assignments_per_person(0), 2)
+-        self.assertEqual(rules.max_assignments_per_person(1), 2)
++        self.assertEqual(rules.max_assignments_per_person(0), 3)
++        self.assertEqual(rules.max_assignments_per_person(1), 3)
+         self.assertEqual(rules.max_assignments_per_person(2), 3)
+         self.assertEqual(rules.max_assignments_per_person(3), 4)
+         self.assertEqual(rules.max_assignments_per_person(4), 5)
+@@ -96,14 +96,14 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.risk_reserve_pct(11), 33)
+ 
+     def test_timesheet_lock_days(self):
+-        self.assertEqual(rules.timesheet_lock_days(0), 6)
+-        self.assertEqual(rules.timesheet_lock_days(1), 6)
+-        self.assertEqual(rules.timesheet_lock_days(5), 6)
+-        self.assertEqual(rules.timesheet_lock_days(6), 4)
+-        self.assertEqual(rules.timesheet_lock_days(15), 4)
+-        self.assertEqual(rules.timesheet_lock_days(16), 2)
+-        self.assertEqual(rules.timesheet_lock_days(50), 2)
+-        self.assertEqual(rules.timesheet_lock_days(51), 1)
++        self.assertEqual(rules.timesheet_lock_days(0), 7)
++        self.assertEqual(rules.timesheet_lock_days(1), 7)
++        self.assertEqual(rules.timesheet_lock_days(5), 7)
++        self.assertEqual(rules.timesheet_lock_days(6), 7)
++        self.assertEqual(rules.timesheet_lock_days(15), 5)
++        self.assertEqual(rules.timesheet_lock_days(16), 5)
++        self.assertEqual(rules.timesheet_lock_days(50), 3)
++        self.assertEqual(rules.timesheet_lock_days(51), 3)
+ 
+     def test_sprint_length_days(self):
+         self.assertEqual(rules.sprint_length_days(0), 5)
+@@ -119,11 +119,11 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.critical_slack_days(0), 0)
+         self.assertEqual(rules.critical_slack_days(1), 0)
+         self.assertEqual(rules.critical_slack_days(30), 0)
+-        self.assertEqual(rules.critical_slack_days(31), 2)
++        self.assertEqual(rules.critical_slack_days(31), 0)
+         self.assertEqual(rules.critical_slack_days(90), 2)
+-        self.assertEqual(rules.critical_slack_days(91), 5)
++        self.assertEqual(rules.critical_slack_days(91), 2)
+         self.assertEqual(rules.critical_slack_days(180), 5)
+-        self.assertEqual(rules.critical_slack_days(181), 10)
++        self.assertEqual(rules.critical_slack_days(181), 5)
+ 
+     def test_holiday_cover_pct(self):
+         self.assertEqual(rules.holiday_cover_pct(0), 5)
+@@ -139,11 +139,11 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.baseline_freeze_days(0), 3)
+         self.assertEqual(rules.baseline_freeze_days(1), 3)
+         self.assertEqual(rules.baseline_freeze_days(30), 3)
+-        self.assertEqual(rules.baseline_freeze_days(31), 7)
++        self.assertEqual(rules.baseline_freeze_days(31), 3)
+         self.assertEqual(rules.baseline_freeze_days(90), 7)
+-        self.assertEqual(rules.baseline_freeze_days(91), 14)
++        self.assertEqual(rules.baseline_freeze_days(91), 7)
+         self.assertEqual(rules.baseline_freeze_days(180), 14)
+-        self.assertEqual(rules.baseline_freeze_days(181), 28)
++        self.assertEqual(rules.baseline_freeze_days(181), 14)
+ 
+     def test_estimate_confidence_pct(self):
+         self.assertEqual(rules.estimate_confidence_pct(0), 90)

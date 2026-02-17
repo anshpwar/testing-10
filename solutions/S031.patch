@@ -1,0 +1,52 @@
+diff --git a/plankit/rules.py b/plankit/rules.py
+index f2489fd..6c264ee 100644
+--- a/plankit/rules.py
++++ b/plankit/rules.py
+@@ -57,13 +57,13 @@ def milestone_slip_tolerance_days(duration_days):
+ 
+ def wip_limit(team_size):
+     """Items that may be in progress at once, by team size."""
+-    if team_size <= 3:
+-        return 1
+-    if team_size <= 6:
+-        return 3
+-    if team_size <= 12:
+-        return 6
+-    return 9
++    if team_size <= 4:
++        return 2
++    if team_size <= 7:
++        return 4
++    if team_size <= 13:
++        return 7
++    return 10
+ 
+ 
+ def escalation_after_days(priority):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index 669eed9..2cb72ac 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -52,14 +52,14 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.milestone_slip_tolerance_days(181), 14)
+ 
+     def test_wip_limit(self):
+-        self.assertEqual(rules.wip_limit(0), 1)
+-        self.assertEqual(rules.wip_limit(1), 1)
+-        self.assertEqual(rules.wip_limit(3), 1)
+-        self.assertEqual(rules.wip_limit(4), 3)
+-        self.assertEqual(rules.wip_limit(6), 3)
+-        self.assertEqual(rules.wip_limit(7), 6)
+-        self.assertEqual(rules.wip_limit(12), 6)
+-        self.assertEqual(rules.wip_limit(13), 9)
++        self.assertEqual(rules.wip_limit(0), 2)
++        self.assertEqual(rules.wip_limit(1), 2)
++        self.assertEqual(rules.wip_limit(3), 2)
++        self.assertEqual(rules.wip_limit(4), 2)
++        self.assertEqual(rules.wip_limit(6), 4)
++        self.assertEqual(rules.wip_limit(7), 4)
++        self.assertEqual(rules.wip_limit(12), 7)
++        self.assertEqual(rules.wip_limit(13), 7)
+ 
+     def test_escalation_after_days(self):
+         self.assertEqual(rules.escalation_after_days(0), 1)

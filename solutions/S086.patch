@@ -1,0 +1,186 @@
+diff --git a/plankit/rules.py b/plankit/rules.py
+index e03e220..e760684 100644
+--- a/plankit/rules.py
++++ b/plankit/rules.py
+@@ -101,57 +101,57 @@ def standup_minutes(team_size):
+ 
+ def risk_reserve_pct(dependency_count):
+     """Schedule reserve held back for the whole plan, in percent, by number of dependency links."""
+-    if dependency_count <= 2:
+-        return 4
+-    if dependency_count <= 5:
+-        return 9
+-    if dependency_count <= 10:
+-        return 18
+-    return 27
++    if dependency_count <= 3:
++        return 5
++    if dependency_count <= 6:
++        return 10
++    if dependency_count <= 11:
++        return 20
++    return 30
+ 
+ 
+ def timesheet_lock_days(team_size):
+     """Working days after which a time entry is locked, by team size."""
+     if team_size <= 5:
+-        return 7
++        return 8
+     if team_size <= 15:
+-        return 5
++        return 6
+     if team_size <= 50:
+-        return 3
+-    return 2
++        return 4
++    return 3
+ 
+ 
+ def sprint_length_days(team_size):
+     """Working days in one sprint, by team size."""
+-    if team_size <= 5:
+-        return 4
+-    if team_size <= 10:
+-        return 9
+-    if team_size <= 20:
+-        return 13
+-    return 19
++    if team_size <= 6:
++        return 5
++    if team_size <= 11:
++        return 10
++    if team_size <= 22:
++        return 14
++    return 21
+ 
+ 
+ def critical_slack_days(project_days):
+     """Slack in working days under which a task counts as near-critical, by project length in working days."""
+-    if project_days <= 30:
++    if project_days <= 33:
+         return 0
+-    if project_days <= 90:
+-        return 1
+-    if project_days <= 180:
+-        return 4
+-    return 9
++    if project_days <= 99:
++        return 2
++    if project_days <= 198:
++        return 5
++    return 10
+ 
+ 
+ def holiday_cover_pct(team_size):
+     """Share of capacity held back for leave and absence, in percent, by team size."""
+     if team_size <= 3:
+-        return 5
++        return 6
+     if team_size <= 8:
+-        return 8
++        return 9
+     if team_size <= 20:
+-        return 12
+-    return 15
++        return 13
++    return 16
+ 
+ 
+ def baseline_freeze_days(duration_days):
+diff --git a/tests/test_rules.py b/tests/test_rules.py
+index b810cee..a78fc00 100644
+--- a/tests/test_rules.py
++++ b/tests/test_rules.py
+@@ -86,54 +86,54 @@ class RuleTests(unittest.TestCase):
+         self.assertEqual(rules.standup_minutes(16), 30)
+ 
+     def test_risk_reserve_pct(self):
+-        self.assertEqual(rules.risk_reserve_pct(0), 4)
+-        self.assertEqual(rules.risk_reserve_pct(1), 4)
+-        self.assertEqual(rules.risk_reserve_pct(2), 4)
+-        self.assertEqual(rules.risk_reserve_pct(3), 9)
+-        self.assertEqual(rules.risk_reserve_pct(5), 9)
+-        self.assertEqual(rules.risk_reserve_pct(6), 18)
+-        self.assertEqual(rules.risk_reserve_pct(10), 18)
+-        self.assertEqual(rules.risk_reserve_pct(11), 27)
++        self.assertEqual(rules.risk_reserve_pct(0), 5)
++        self.assertEqual(rules.risk_reserve_pct(1), 5)
++        self.assertEqual(rules.risk_reserve_pct(2), 5)
++        self.assertEqual(rules.risk_reserve_pct(3), 5)
++        self.assertEqual(rules.risk_reserve_pct(5), 10)
++        self.assertEqual(rules.risk_reserve_pct(6), 10)
++        self.assertEqual(rules.risk_reserve_pct(10), 20)
++        self.assertEqual(rules.risk_reserve_pct(11), 20)
+ 
+     def test_timesheet_lock_days(self):
+-        self.assertEqual(rules.timesheet_lock_days(0), 7)
+-        self.assertEqual(rules.timesheet_lock_days(1), 7)
+-        self.assertEqual(rules.timesheet_lock_days(5), 7)
+-        self.assertEqual(rules.timesheet_lock_days(6), 5)
+-        self.assertEqual(rules.timesheet_lock_days(15), 5)
+-        self.assertEqual(rules.timesheet_lock_days(16), 3)
+-        self.assertEqual(rules.timesheet_lock_days(50), 3)
+-        self.assertEqual(rules.timesheet_lock_days(51), 2)
++        self.assertEqual(rules.timesheet_lock_days(0), 8)
++        self.assertEqual(rules.timesheet_lock_days(1), 8)
++        self.assertEqual(rules.timesheet_lock_days(5), 8)
++        self.assertEqual(rules.timesheet_lock_days(6), 6)
++        self.assertEqual(rules.timesheet_lock_days(15), 6)
++        self.assertEqual(rules.timesheet_lock_days(16), 4)
++        self.assertEqual(rules.timesheet_lock_days(50), 4)
++        self.assertEqual(rules.timesheet_lock_days(51), 3)
+ 
+     def test_sprint_length_days(self):
+-        self.assertEqual(rules.sprint_length_days(0), 4)
+-        self.assertEqual(rules.sprint_length_days(1), 4)
+-        self.assertEqual(rules.sprint_length_days(5), 4)
+-        self.assertEqual(rules.sprint_length_days(6), 9)
+-        self.assertEqual(rules.sprint_length_days(10), 9)
+-        self.assertEqual(rules.sprint_length_days(11), 13)
+-        self.assertEqual(rules.sprint_length_days(20), 13)
+-        self.assertEqual(rules.sprint_length_days(21), 19)
++        self.assertEqual(rules.sprint_length_days(0), 5)
++        self.assertEqual(rules.sprint_length_days(1), 5)
++        self.assertEqual(rules.sprint_length_days(5), 5)
++        self.assertEqual(rules.sprint_length_days(6), 5)
++        self.assertEqual(rules.sprint_length_days(10), 10)
++        self.assertEqual(rules.sprint_length_days(11), 10)
++        self.assertEqual(rules.sprint_length_days(20), 14)
++        self.assertEqual(rules.sprint_length_days(21), 14)
+ 
+     def test_critical_slack_days(self):
+         self.assertEqual(rules.critical_slack_days(0), 0)
+         self.assertEqual(rules.critical_slack_days(1), 0)
+         self.assertEqual(rules.critical_slack_days(30), 0)
+-        self.assertEqual(rules.critical_slack_days(31), 1)
+-        self.assertEqual(rules.critical_slack_days(90), 1)
+-        self.assertEqual(rules.critical_slack_days(91), 4)
+-        self.assertEqual(rules.critical_slack_days(180), 4)
+-        self.assertEqual(rules.critical_slack_days(181), 9)
++        self.assertEqual(rules.critical_slack_days(31), 0)
++        self.assertEqual(rules.critical_slack_days(90), 2)
++        self.assertEqual(rules.critical_slack_days(91), 2)
++        self.assertEqual(rules.critical_slack_days(180), 5)
++        self.assertEqual(rules.critical_slack_days(181), 5)
+ 
+     def test_holiday_cover_pct(self):
+-        self.assertEqual(rules.holiday_cover_pct(0), 5)
+-        self.assertEqual(rules.holiday_cover_pct(1), 5)
+-        self.assertEqual(rules.holiday_cover_pct(3), 5)
+-        self.assertEqual(rules.holiday_cover_pct(4), 8)
+-        self.assertEqual(rules.holiday_cover_pct(8), 8)
+-        self.assertEqual(rules.holiday_cover_pct(9), 12)
+-        self.assertEqual(rules.holiday_cover_pct(20), 12)
+-        self.assertEqual(rules.holiday_cover_pct(21), 15)
++        self.assertEqual(rules.holiday_cover_pct(0), 6)
++        self.assertEqual(rules.holiday_cover_pct(1), 6)
++        self.assertEqual(rules.holiday_cover_pct(3), 6)
++        self.assertEqual(rules.holiday_cover_pct(4), 9)
++        self.assertEqual(rules.holiday_cover_pct(8), 9)
++        self.assertEqual(rules.holiday_cover_pct(9), 13)
++        self.assertEqual(rules.holiday_cover_pct(20), 13)
++        self.assertEqual(rules.holiday_cover_pct(21), 16)
+ 
+     def test_baseline_freeze_days(self):
+         self.assertEqual(rules.baseline_freeze_days(0), 3)
